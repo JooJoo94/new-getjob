@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kim.getjob.repository.ResumeRepository">
+
+	<insert id="resumeSaveBasic">
+	<selectKey resultType="int" keyProperty="id" order="AFTER">
+   		SELECT LAST_INSERT_ID()
+	</selectKey>
+		insert into resume_basic(userId, title, name, birth, email, phone, sample_address, sample_detailAddress, createDate)
+		values(#{userId}, #{title},#{name}, #{birth}, #{email},#{phone},#{sample_address},#{sample_detailAddress},now())
+	</insert>
+	
+	<select id="findById" resultType="com.kim.getjob.model.resume.dto.ReqResumeBasicDto">
+		select id from resume_basic 
+	
+	</select>
+	
+	<insert id="resumeSaveEducation">
+		insert into resume_education(id, level, schoolName, local, startYear, endYear)
+		values(#{id}, #{level}, #{schoolName},#{local},#{startYear},#{endYear})
+	</insert>
+	
+	<insert id="resumeSaveUniversity">
+		insert into resume_university(id, level, schoolName, local, major, startYear, endYear, score) 
+		values(#{id}, #{level}, #{schoolName},#{local},#{startYear},#{endYear}, #{score})
+	</insert>
+	
+	<select id="resumeBasicfindId" resultType="com.kim.getjob.model.resume.dto.RespResumeBasicDto">
+        select * from resume_basic where userId=#{userId}
+	</select>
+	
+	
+	<select id="resumeBasicfindAll" resultType="com.kim.getjob.model.resume.dto.RespResumeBasicDto">
+        select * from resume_basic where id=#{id}
+	</select>
+	
+	<select id="resumeEducationfindAll" resultType="com.kim.getjob.model.resume.dto.RespResumeEducationDto">
+        select * from resume_education where id=#{id}
+	</select>
+	
+	<select id="resumeUniversityfindAll" resultType="com.kim.getjob.model.resume.dto.RespResumeUniversityDto">
+        select * from resume_university where id=#{id}
+	</select>
+</mapper>

@@ -15,9 +15,15 @@ public interface ResumeRepository {
 	public int resumeSaveBasic(ReqResumeBasicDto dto);
 	public int resumeSaveEducation(ReqResumeEducationDto dto);
 	public int resumeSaveUniversity(ReqResumeUniversityDto dto);
-	public List<RespResumeBasicDto> resumeBasicfindAll(int id);
-	public List<RespResumeEducationDto> resumeEducationfindAll(int id);
-	public List<RespResumeUniversityDto> resumeUniversityfindAll(int id);
-	public List<RespResumeBasicDto> resumeBasicfindId(int userId);
+	
+	public List<RespResumeBasicDto> resumeBasicfindByUserId(int userId);
+	
+	public RespResumeBasicDto resumeBasicfindById(int id);
+	public RespResumeEducationDto resumeEducationfindById(int id);
+	public RespResumeUniversityDto resumeUniversityfindById(int id);
+	
+	public int resumeBasicUpdate(ReqResumeBasicDto dto);
+	public int resumeEducationUpdate(ReqResumeEducationDto dto);
+	public int resumeUniversityUpdate(ReqResumeUniversityDto dto);
 
 }

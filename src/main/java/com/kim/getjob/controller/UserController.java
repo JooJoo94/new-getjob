@@ -40,6 +40,12 @@ public class UserController {
 		return "/user/login";
 	}
 	
+	@GetMapping("/user/logout")
+	public String logout() {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
 	@PostMapping("/user/login")
 	public ResponseEntity<?> login(@Valid @RequestBody ReqLoginDto dto, BindingResult bindResult) {
 

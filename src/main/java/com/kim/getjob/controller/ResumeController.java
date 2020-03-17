@@ -28,13 +28,12 @@ public class ResumeController {
 	
 	@GetMapping("/resume/resumePreview/{id}")
 	public String resumeCheck(@PathVariable int id, Model model) {
-		System.out.println("----");
-		model.addAttribute("basic", resumeService.basic이력서미리보기(id));
-		System.out.println("basic = " + resumeService.basic이력서미리보기(id));
-		model.addAttribute("education", resumeService.education이력서미리보기(id));
 		
-		if(resumeService.education이력서미리보기(id).get(0).getLevel()==4) {
-			model.addAttribute("university", resumeService.University이력서미리보기(id));
+		model.addAttribute("basic", resumeService.basic이력서(id));
+		model.addAttribute("education", resumeService.education이력서(id));
+
+		if(resumeService.education이력서(id).getLevel()==4) {
+			model.addAttribute("university", resumeService.University이력서(id));
 		}
 		
 		return "/board/resumePreview";
@@ -47,7 +46,18 @@ public class ResumeController {
 		model.addAttribute("resumes", resumeService.이력서목록보기(principal.getId()));
 
 		return "/board/resumeList";
-	}	
+	}
+	
+	@GetMapping("/resume/resumeUpdate/{id}")
+	public String update(@PathVariable int id, Model model) {
+
+		model.addAttribute("basic", resumeService.basic이력서(id));
+		model.addAttribute("education", resumeService.education이력서(id));
+		if(resumeService.education이력서(id).getLevel()==4) {
+			model.addAttribute("university", resumeService.University이력서(id));
+		}
+		return "/board/resumeUpdate";
+	}
 
 	@PostMapping("/resume/write")
 	public ResponseEntity<?> write(@RequestBody ReqResumeWriteDto dto) {

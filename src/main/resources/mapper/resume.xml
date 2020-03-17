@@ -27,20 +27,35 @@
 		values(#{id}, #{level}, #{schoolName},#{local},#{startYear},#{endYear}, #{score})
 	</insert>
 	
-	<select id="resumeBasicfindId" resultType="com.kim.getjob.model.resume.dto.RespResumeBasicDto">
+	<select id="resumeBasicfindByUserId" resultType="com.kim.getjob.model.resume.dto.RespResumeBasicDto">
         select * from resume_basic where userId=#{userId}
 	</select>
 	
 	
-	<select id="resumeBasicfindAll" resultType="com.kim.getjob.model.resume.dto.RespResumeBasicDto">
+	<select id="resumeBasicfindById" resultType="com.kim.getjob.model.resume.dto.RespResumeBasicDto">
         select * from resume_basic where id=#{id}
 	</select>
 	
-	<select id="resumeEducationfindAll" resultType="com.kim.getjob.model.resume.dto.RespResumeEducationDto">
+	<select id="resumeEducationfindById" resultType="com.kim.getjob.model.resume.dto.RespResumeEducationDto">
         select * from resume_education where id=#{id}
 	</select>
 	
-	<select id="resumeUniversityfindAll" resultType="com.kim.getjob.model.resume.dto.RespResumeUniversityDto">
+	<select id="resumeUniversityfindById" resultType="com.kim.getjob.model.resume.dto.RespResumeUniversityDto">
         select * from resume_university where id=#{id}
 	</select>
+	
+	<update id="resumeBasicUpdate">
+		update resume_basic set name=#{name}, birth=#{birth}, email=#{email}, phone=#{phone}, sample_address=#{sample_address}, 
+		sample_detailAddress=#{sample_detailAddress} where id = #{id}
+	</update> 
+	
+	<update id="resumeEducationUpdate">
+		update resume_education set level=#{level}, schoolName=#{schoolName}, local=#{local}, startYear=#{startYear}, endYear=#{endYear}, 
+		where id = #{id}
+	</update> 
+	
+	<update id="resumeUniversityUpdate">
+		update resume_university set level=#{level}, schoolName=#{schoolName}, local=#{local}, major=#{major}, startYear=#{startYear}, 
+		endYear=#{endYear}, score=#{score}, where id = #{id}
+	</update> 
 </mapper>

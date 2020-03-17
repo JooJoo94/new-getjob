@@ -63,12 +63,10 @@
 													<li><a href="/resume/resumeList">이력서목록 </a></li>
 													<li><a href="elements.html">elements</a></li>
 												</ul></li>
-											<li><a href="#">지역별 <i class="ti-angle-down"></i></a>
+											<li><a href="/resume/resumeList">나의 이력서 <i class="ti-angle-down"></i></a>
 												<ul class="submenu">
-													<li><a href="blog.html">blog</a></li>
-													<li><a href="single-blog.html">single-blog</a></li>
-												</ul></li>
-											<li><a href="/board/resume">포트폴리오</a></li>
+													<li><a href="/board/resume">이력서 작성</a></li>
+												</ul></li>										
 											<li><a href="contact.html">자기소개서</a></li>
 										</ul>
 									</nav>
@@ -83,7 +81,7 @@
 												<a>${sessionScope.principal.userName} <strong>님</strong></a>
 											</div>
 											<div class="phone_num d-none d-xl-block">
-												<a href="/user/join">회원가입</a>
+												<a href="/user/logout">로그아웃</a>
 											</div>
 											<div class="d-none d-lg-block">
 												<a class="boxed-btn3" href="#">Post a Job</a>

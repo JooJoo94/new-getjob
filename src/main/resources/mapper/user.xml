@@ -11,11 +11,11 @@
 	
 	<insert id="save">
 		insert into user(userName, userId, password, email, phone, createDate) 
-		values(#{userName},#{userId},#{password},#{email},#{phone}, now())
+		values(#{userName},#{userId},#{password},#{email}, #{phone}, now())
 	</insert>
 	
 	<select id="findByUsernameAndPassword" resultType="com.kim.getjob.model.user.User">
-		select id, userName, userId, email, phone, address from user
+		select id, userName, userId, email, phone from user
 		where userId = #{userId} and password=#{password}
 	</select>
 	

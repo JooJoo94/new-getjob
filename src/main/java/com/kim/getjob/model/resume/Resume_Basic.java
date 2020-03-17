@@ -13,6 +13,7 @@ public class Resume_Basic {
 	
 	private int id;
 	private int userId;
+	private String title;
 	private String name;
 	private int birth;
 	private String email;

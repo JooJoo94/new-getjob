@@ -52,14 +52,6 @@
 									type="text" placeholder="전화번호 입력하세요" />
 							</div>
 						</div>
-						<div class="col-sm-12">
-							<div class="form-group">
-								<label for="address">주소</label>
-								<button class="btn boxed-btn pull-right">주소찾기</button>
-								<input class="form-control" id="address" type="text"
-									 placeholder="주소를 입력하세요" />
-							</div>
-						</div>
 					</div>
 					<div class="form-group mt-3">
 						<button type="submit" id="join--submit" class="button btn-block  button-contactForm btn_4 boxed-btn">
@@ -78,8 +70,7 @@ $('#join--submit').on('click', function() {
 		userId : $('#userId').val(), 
 		password : $('#password').val(),
 		email : $('#email').val(),
-		phone : $('#phone').val(),
-		address : $('#address').val()
+		phone : $('#phone').val()
 	};
 
 	$.ajax({

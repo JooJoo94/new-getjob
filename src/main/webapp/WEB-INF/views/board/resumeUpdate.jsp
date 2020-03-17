@@ -12,30 +12,30 @@
 				<div class="apply_job_form white-bg">
 					<h4>기본정보</h4>
 					<form id="form1" class="multiForm">
-						<input class="col-md-12 job_form_title" type="text" name = "title"
+						<input class="col-md-12 job_form_title" type="text" name = "title" value = "${basic.title}"
 							placeholder="이력서 제목" />
 						<div class="row">
 							<div class="col-md-12">
 								<div class="input_field">
-									<label class="col-md-2">이름</label> <input class="col-md-9"
+									<label class="col-md-2">이름</label> <input class="col-md-9" value = "${basic.name}"
 										id="name" name="name" type="text" placeholder="이름 입력" />
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="input_field">
-									<label class="col-md-2">생년월일</label> <input class="col-md-9"
+									<label class="col-md-2">생년월일</label> <input class="col-md-9" value = "${basic.birth}"
 										id="birth" name="birth" type="text" placeholder="YYYYMMDD" />
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="input_field">
-									<label class="col-md-2">이메일</label> <input class="col-md-9"
+									<label class="col-md-2">이메일</label> <input class="col-md-9" value = "${basic.email}"
 										id="email" name="email" type="text" placeholder="이메일 입력" />
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="input_field">
-									<label class="col-md-2">전화번호</label> <input class="col-md-9"
+									<label class="col-md-2">전화번호</label> <input class="col-md-9" value = "${basic.phone}"
 										id="phone" name="phone" type="text" placeholder="전화번호 입력" />
 								</div>
 							</div>
@@ -61,12 +61,13 @@
 						<div class="row">
 							<div class="col-md-12 m-4">
 								<div class="input_field text-center">
-									<label for="elementary" class="col-md-3 p-3 level-education">초등학교
-										졸업</label> <input type="hidden" id="elementary" value="1" /> <label
+									<input type="hidden" id="hiddenLevel" value="${education.level}"/>
+									<label for="elementary" id = "elementaryLabel" class="col-md-3 p-3 level-education">초등학교
+										졸업</label> <input type="hidden" id="elementary" value="1" /> <label id = "middleLabel"
 										for="middle" class="col-md-2 p-3 level-education">중학교
-										졸업</label> <input type="hidden" id="middle" value="2" /> <label
+										졸업</label> <input type="hidden" id="middle" value="2" /> <label id = "highLabel"
 										for="high" class="col-md-3 p-3 level-education">고등학교
-										졸업</label> <input type="hidden" id="high" value="3" /> <label
+										졸업</label> <input type="hidden" id="high" value="3" /> <label id = "universityLabel"
 										for="university" class="col-md-3 p-3 level-education">대학교
 										졸업</label> <input type="hidden" id="university" value="4" />
 								</div>
@@ -77,20 +78,20 @@
 							</h4>
 							<div class="col-md-12">
 								<div class="input_field">
-									<label class="col-md-2">학교명</label> <input name="schoolName"
+									<label class="col-md-2">학교명</label> <input name="schoolName" value = "${education.schoolName}"
 										class="col-md-9" type="text" placeholder="학교 입력">
 								</div>
 								<div class="input_field">
-									<label class="col-md-2" for="name">지역</label> <input
+									<label class="col-md-2" for="name">지역</label> <input value = "${education.local}"
 										name="local" class="col-md-9" type="text" placeholder="지역 입력">
 								</div>
 							</div>
 
 							<div class="col-md-12">
 								<div class="input_field">
-									<label class="col-md-2">재학기간</label> <input id="startYear"
+									<label class="col-md-2">재학기간</label> <input id="startYear" value = "${education.startYear}"
 										name="startYear" class="col-md-4" type="text"
-										placeholder="입학 년도"> <input id="endYear"
+										placeholder="입학 년도"> <input id="endYear" value = "${education.endYear}"
 										name="endYear" class="col-md-4" type="text"
 										placeholder="졸업 년도">
 								</div>
@@ -113,9 +114,8 @@
 										class="btn dropdown-toggle col-md-9 p-3 mb-4"
 										data-toggle="dropdown">전공계열 선택</button>
 									<div class="dropdown-menu col-md-9">
-										<a class="dropdown-item">대학(2,3년)</a> 
-										<a class="dropdown-item">대학교(4년)</a> 
-										<a class="dropdown-item">대학원(석사)</a>
+										<a class="dropdown-item">대학(2,3년)</a> <a
+											class="dropdown-item">대학교(4년)</a> <a class="dropdown-item">대학원(석사)</a>
 										<a class="dropdown-item">대학원(박사)</a>
 									</div>
 
@@ -159,8 +159,8 @@
 				</div>
 				<!-- 대학정보 Form 끝-->
 				<div class="col-md-12 p-3">
-					<div class="submit_btn" id="write--submit">
-						<button class="boxed-btn3 w-100" type="submit">이력서 저장</button>
+					<div class="submit_btn" id="update--submit">
+						<button class="boxed-btn3 w-100" type="submit">이력서 수정</button>
 					</div>
 				</div>
 			</div>
@@ -227,7 +227,7 @@
 				};
 			});
 
-	$('#update--submit').on('click', function() {
+	$('#write--submit').on('click', function() {
 		var reqResumeBasicDto = $('#form1').serializeObject();
 		var reqResumeEducationDto = $('#form2').serializeObject();
 		var reqResumeUniversityDto = $('#form3').serializeObject();
@@ -235,7 +235,7 @@
 		var data = {reqResumeBasicDto, reqResumeEducationDto, reqResumeUniversityDto};
 		console.log(data);
 		$.ajax({
-			type : 'POST',
+			type : 'PUT',
 			url : '/resume/write',
 			data : JSON.stringify(data),
 			contentType : "application/json; charset=utf-8",
@@ -257,9 +257,18 @@
 	$('.dropdown-item').on('click', function() {
 		$('.dropdown-toggle').html($(this).text());
 	});
+
 	
+	if($('#hiddenLevel').val() == 1) {
+		$('#elementaryLabel').css('background-color', '#001D38');
+	} else if ($('#hiddenLevel').val() == 2) {
+		$('#middleLabel').css('background-color', '#001D38');
+	} else if ($('#hiddenLevel').val() == 3) {
+		$('#highLabel').css('background-color', '#001D38');		
+	} else if ($('#hiddenLevel').val() == 4) {
+		$('#universityLabel').css('background-color', '#001D38');
+		$('#universityImformation').show();
+	} 
 </script>
-
-
 <%@include file="../include/footer.jsp"%>
 <%@include file="../include/script.jsp"%>

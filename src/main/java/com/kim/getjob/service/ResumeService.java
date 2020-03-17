@@ -3,9 +3,13 @@ package com.kim.getjob.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kim.getjob.model.ReturnCode;
+import com.kim.getjob.model.resume.Resume_Basic;
 import com.kim.getjob.model.resume.dto.ReqResumeBasicDto;
 import com.kim.getjob.model.resume.dto.ReqResumeEducationDto;
 import com.kim.getjob.model.resume.dto.ReqResumeUniversityDto;
@@ -14,10 +18,14 @@ import com.kim.getjob.model.resume.dto.RespResumeBasicDto;
 import com.kim.getjob.model.resume.dto.RespResumeEducationDto;
 import com.kim.getjob.model.resume.dto.RespResumeUniversityDto;
 import com.kim.getjob.model.resume.dto.RespResumeWriteDto;
+import com.kim.getjob.model.user.User;
 import com.kim.getjob.repository.ResumeRepository;
 
 @Service
 public class ResumeService {
+	
+	@Autowired
+	private HttpSession session;
 
 	@Autowired
 	private ResumeRepository resumeRepository;
@@ -41,24 +49,42 @@ public class ResumeService {
 		return resumeRepository.resumeSaveBasic(reqResumeBasicDto);
 	}
 
+	// 나의 이력서 목록
 	public List<RespResumeBasicDto> 이력서목록보기(int userId) {
 
-		return resumeRepository.resumeBasicfindId(userId);
+		return resumeRepository.resumeBasicfindByUserId(userId);
+	}
+	
+	public RespResumeBasicDto basic이력서(int id) {
+
+		return resumeRepository.resumeBasicfindById(id);
 	}
 
-	public List<RespResumeBasicDto> basic이력서미리보기(int id) {
+	public RespResumeEducationDto education이력서(int id) {
 
-		return resumeRepository.resumeBasicfindAll(id);
+		return resumeRepository.resumeEducationfindById(id);
 	}
 
-	public List<RespResumeEducationDto> education이력서미리보기(int id) {
-
-		return resumeRepository.resumeEducationfindAll(id);
-	}
-
-	public List<RespResumeUniversityDto> University이력서미리보기(int id) {
+	public RespResumeUniversityDto University이력서(int id) {
 		
-		return resumeRepository.resumeUniversityfindAll(id);
+		return resumeRepository.resumeUniversityfindById(id);
+	}
+	
+	public int 이력서수정완료(ReqResumeWriteDto dto) {
+		
+		User principal = (User) session.getAttribute("principal");
+		RespResumeBasicDto respResumeBasicDto = resumeRepository.resumeBasicfindById(dto.getReqResumeBasicDto().getId());
+		
+		if(principal.getId() == respResumeBasicDto.getUserId()) {
+			int result = resumeRepository.resumeBasicUpdate(dto.getReqResumeBasicDto()) 
+					+ resumeRepository.resumeEducationUpdate(dto.getReqResumeEducationDto());
+			if (dto.getReqResumeEducationDto().getLevel() == 4) {
+						result += resumeRepository.resumeUniversityUpdate(dto.getReqResumeUniversityDto());
+					}
+			return result; 
+		}else {
+			return ReturnCode.권한없음; 
+		}		
 	}
 
 }

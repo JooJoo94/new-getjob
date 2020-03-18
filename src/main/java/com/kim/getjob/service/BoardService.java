@@ -53,8 +53,10 @@ public class BoardService {
 					.method(Connection.Method.GET).ignoreContentType(true);
 			
 			Document doc = conn.get();
-			Elements element = doc.select("#content .top_recruilt_list");
+			Elements element = doc.select(".wrap_list_banner ul.unit_list");
+			System.out.println("element---");
 			System.out.println(element);
+			System.out.println("end element");
 			for(Element el : element) {
 				RespListDto dto = new RespListDto();
 				  dto.setCompanyName(el.select("strong.poduct_tit").text());

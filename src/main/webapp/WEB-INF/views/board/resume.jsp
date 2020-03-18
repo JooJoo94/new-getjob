@@ -227,7 +227,7 @@
 				};
 			});
 
-	$('#update--submit').on('click', function() {
+	$('#write--submit').on('click', function() {
 		var reqResumeBasicDto = $('#form1').serializeObject();
 		var reqResumeEducationDto = $('#form2').serializeObject();
 		var reqResumeUniversityDto = $('#form3').serializeObject();

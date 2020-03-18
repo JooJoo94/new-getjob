@@ -1,0 +1,2 @@
+[2020-03-18 14:41:57:44830][http-nio-8080-exec-2] WARN  c.kim.getjob.aop.warn.BindingAdvice - com.kim.getjob.controller.UserController.join() => 필드 : email 경고 : 이메일을 입력하세요.
+[2020-03-18 14:41:57:44831][http-nio-8080-exec-2] WARN  c.kim.getjob.aop.warn.BindingAdvice - com.kim.getjob.controller.UserController.join() => 필드 : phone 경고 : 전화번호를 입력하세요.

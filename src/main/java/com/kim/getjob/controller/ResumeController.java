@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.kim.getjob.aop.warn.BindingAdvice;
 import com.kim.getjob.model.RespCM;
 import com.kim.getjob.model.resume.dto.ReqResumeWriteDto;
 import com.kim.getjob.model.user.User;
@@ -50,7 +52,7 @@ public class ResumeController {
 	
 	@GetMapping("/resume/resumeUpdate/{id}")
 	public String update(@PathVariable int id, Model model) {
-
+		
 		model.addAttribute("basic", resumeService.basic이력서(id));
 		model.addAttribute("education", resumeService.education이력서(id));
 		if(resumeService.education이력서(id).getLevel()==4) {
@@ -72,6 +74,20 @@ public class ResumeController {
 			return new ResponseEntity<RespCM>(new RespCM(400, "fail"), HttpStatus.BAD_REQUEST);
 		}
 
+	}
+	
+	@PutMapping("/resume/update")
+	public ResponseEntity<?> update(@RequestBody ReqResumeWriteDto dto){
+		
+		int result = resumeService.이력서수정완료(dto);
+		
+		if(result == 2  || result == 3) {
+			return new ResponseEntity<RespCM>(new RespCM(200, "ok"), HttpStatus.OK);	
+		}else if(result == -3) {
+			return new ResponseEntity<RespCM>(new RespCM(403, "fail"), HttpStatus.FORBIDDEN);
+		}else {
+			return new ResponseEntity<RespCM>(new RespCM(400, "fail"), HttpStatus.BAD_REQUEST);
+		}
 	}
 
 }

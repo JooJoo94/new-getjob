@@ -50,12 +50,12 @@
 	</update> 
 	
 	<update id="resumeEducationUpdate">
-		update resume_education set level=#{level}, schoolName=#{schoolName}, local=#{local}, startYear=#{startYear}, endYear=#{endYear}, 
-		where id = #{id}
+		update resume_education set level=#{level}, schoolName=#{schoolName}, local=#{local}, startYear=#{startYear}, endYear=#{endYear} 
+		where id=#{id}
 	</update> 
 	
 	<update id="resumeUniversityUpdate">
 		update resume_university set level=#{level}, schoolName=#{schoolName}, local=#{local}, major=#{major}, startYear=#{startYear}, 
-		endYear=#{endYear}, score=#{score}, where id = #{id}
+		endYear=#{endYear}, score=#{score} where id = #{id}
 	</update> 
 </mapper>

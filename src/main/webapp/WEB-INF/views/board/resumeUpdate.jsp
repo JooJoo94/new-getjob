@@ -12,6 +12,8 @@
 				<div class="apply_job_form white-bg">
 					<h4>기본정보</h4>
 					<form id="form1" class="multiForm">
+						<input type="hidden" name="id" value="${basic.id}"/>
+						<input type="hidden" name="userId" value = "${basic.userId}"/>
 						<input class="col-md-12 job_form_title" type="text" name = "title" value = "${basic.title}"
 							placeholder="이력서 제목" />
 						<div class="row">
@@ -42,10 +44,10 @@
 							<div class="col-md-12">
 								<div class="input_field">
 									<label class="col-md-2">주소</label> <input type="text"
-										class="col-md-9" onclick="sample6_execDaumPostcode()"
+										class="col-md-9" onclick="sample6_execDaumPostcode()" value="${basic.sample_address}"
 										name="sample_address" id="sample_address" placeholder="주소" /><br>
 									<label class="col-md-2" type="hidden"></label> <input
-										name="sample_detailAddress" class="col-md-9" type="text"
+										name="sample_detailAddress" class="col-md-9" type="text" value="${basic.sample_detailAddress}"
 										id="sample_detailAddress" placeholder="상세주소" />
 								</div>
 							</div>
@@ -61,7 +63,8 @@
 						<div class="row">
 							<div class="col-md-12 m-4">
 								<div class="input_field text-center">
-									<input type="hidden" id="hiddenLevel" value="${education.level}"/>
+									<input type = "hidden" name="id" value="${education.id}"/>
+									<input class = "level-education" type="hidden" id="hiddenLevel" value="${education.level}"/>
 									<label for="elementary" id = "elementaryLabel" class="col-md-3 p-3 level-education">초등학교
 										졸업</label> <input type="hidden" id="elementary" value="1" /> <label id = "middleLabel"
 										for="middle" class="col-md-2 p-3 level-education">중학교
@@ -108,8 +111,8 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="input_field">
+									<input type = "hidden" name="id" value="${university.id}"/>
 									<label class="col-md-2">대학</label>
-
 									<button type="button"
 										class="btn dropdown-toggle col-md-9 p-3 mb-4"
 										data-toggle="dropdown">전공계열 선택</button>
@@ -227,7 +230,7 @@
 				};
 			});
 
-	$('#write--submit').on('click', function() {
+	$('#update--submit').on('click', function() {
 		var reqResumeBasicDto = $('#form1').serializeObject();
 		var reqResumeEducationDto = $('#form2').serializeObject();
 		var reqResumeUniversityDto = $('#form3').serializeObject();
@@ -236,7 +239,7 @@
 		console.log(data);
 		$.ajax({
 			type : 'PUT',
-			url : '/resume/write',
+			url : '/resume/update',
 			data : JSON.stringify(data),
 			contentType : "application/json; charset=utf-8",
 			dataType : 'json'
@@ -261,12 +264,16 @@
 	
 	if($('#hiddenLevel').val() == 1) {
 		$('#elementaryLabel').css('background-color', '#001D38');
+		$('#elemantary').attr('name', 'level');
 	} else if ($('#hiddenLevel').val() == 2) {
 		$('#middleLabel').css('background-color', '#001D38');
+		$('#middle').attr('name', 'level');
 	} else if ($('#hiddenLevel').val() == 3) {
-		$('#highLabel').css('background-color', '#001D38');		
+		$('#highLabel').css('background-color', '#001D38');
+		$('#high').attr('name', 'level');		
 	} else if ($('#hiddenLevel').val() == 4) {
 		$('#universityLabel').css('background-color', '#001D38');
+		$('#university').attr('name', 'level');
 		$('#universityImformation').show();
 	} 
 </script>

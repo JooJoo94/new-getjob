@@ -74,13 +74,14 @@ public class ResumeService {
 		
 		User principal = (User) session.getAttribute("principal");
 		RespResumeBasicDto respResumeBasicDto = resumeRepository.resumeBasicfindById(dto.getReqResumeBasicDto().getId());
-		
+
 		if(principal.getId() == respResumeBasicDto.getUserId()) {
 			int result = resumeRepository.resumeBasicUpdate(dto.getReqResumeBasicDto()) 
 					+ resumeRepository.resumeEducationUpdate(dto.getReqResumeEducationDto());
 			if (dto.getReqResumeEducationDto().getLevel() == 4) {
 						result += resumeRepository.resumeUniversityUpdate(dto.getReqResumeUniversityDto());
 					}
+
 			return result; 
 		}else {
 			return ReturnCode.권한없음; 

@@ -3324,9 +3324,9 @@ h3 {
   -moz-border-radius: 5px;
   border-radius: 5px;
   padding: 15px;
-  background: #f5f7fa;
+  background: #ffffff;
   margin-right: 25px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid #ffffff;
 }
 
 /* line 46, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_list.scss */
@@ -3476,9 +3476,10 @@ h3 {
 /* line 115, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_list.scss */
 .job_listing_area .job_lists .single_jobs .jobs_right .date p {
   margin-bottom: 0;
-  font-size: 14px;
+  font-size: 20px;
   font-style: italic;
-  color: #7a838b;
+  color: #FF0000;
+  border: 2px;
 }
 
 /* line 123, ../../Arafath/CL/December/235. Job board/HTML/scss/_job_list.scss */

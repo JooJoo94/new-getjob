@@ -137,33 +137,27 @@
 		</div>
 		<div class="job_lists">
 			<div class="row">
-			<c:forEach var="board" items="${boards}">
-			
+			<c:forEach var="board" items="${boards}">		
 				<div class="col-lg-12 col-md-12">
 					<div class="single_jobs white-bg d-flex justify-content-between">
 						<div class="jobs_left d-flex align-items-center">
 							<div class="thumb">
-								<img src="/img/svg_icon/1.svg" alt="" />
+								<img src="${board.image}"style="width: 80px; height: 50px; float: left; padding: auto"/>
 							</div>
 							<div class="jobs_conetent">
-								<a href="http://www.saramin.co.kr${board.href}"><h4>${board.title}</h4></a>
+								<a href="http://www.saramin.co.kr${board.href}"><h4 style="font-family: "Roboto", sans-serif;">${board.title}</h4></a>
 								<div class="links_locat d-flex align-items-center">
 									<div class="location">
 										<p>
-											<i class="fa fa-map-marker"></i> ${board.companyName}
+											<i class="fas fa-building"></i>${board.companyName}
 										</p>
 									</div>
-									<div class="location">
-										<p>
-											<i class="fa fa-clock-o"></i> Part-time
-										</p>
-									</div>
+									
 								</div>
 							</div>
 						</div>
 						<div class="jobs_right">
 							<div class="apply_now">
-								<a class="heart_mark" href="#"> <i class="ti-heart"></i>
 								</a> <a href="job_details.html" class="boxed-btn3">Apply Now</a>
 							</div>
 							<div class="date">

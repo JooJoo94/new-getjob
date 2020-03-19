@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RespListDto {
 	
+	private String image;
 	private String companyName;
 	private String title;
 	private String deadLine;

@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="../include/nav.jsp"%>	
+<%@include file="../include/nav.jsp"%>
+<style type="text/css">
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap");
+h4 {
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+}
+</style>
+
 <!-- job_listing_area_start  -->
 <div class="job_listing_area plus_padding">
 	<div class="container">
@@ -16,58 +25,44 @@
 										<input type="text" placeholder="Search keyword">
 									</div>
 								</div>
-								<div class="col-lg-12">
+								<div class="col-lg-12 p-2">
 									<div class="single_field">
-										<select class="wide">
-											<option data-display="Location">Location</option>
-											<option value="1">Rangpur</option>
-											<option value="2">Dhaka</option>
-										</select>
+										  <button type="button" class="btn btn-outline-secondary btn-lg w-100 h-20">웹 개발</button>
 									</div>
 								</div>
-								<div class="col-lg-12">
+								<div class="col-lg-12 p-2">
 									<div class="single_field">
-										<select class="wide">
-											<option data-display="Category">Category</option>
-											<option value="1">Category 1</option>
-											<option value="2">Category 2</option>
-										</select>
+										  <button type="button" class="btn btn-outline-secondary btn-lg w-100 h-20">응용프로그램 개발</button>
 									</div>
 								</div>
-								<div class="col-lg-12">
+								<div class="col-lg-12 p-2">
 									<div class="single_field">
-										<select class="wide">
-											<option data-display="Experience">Experience</option>
-											<option value="1">Experience 1</option>
-											<option value="2">Experience 2</option>
-										</select>
+										  <button type="button" class="btn btn-outline-secondary btn-lg w-100 h-20">시스템 개발</button>
 									</div>
 								</div>
-								<div class="col-lg-12">
+								<div class="col-lg-12 p-2">
 									<div class="single_field">
-										<select class="wide">
-											<option data-display="Job type">Job type</option>
-											<option value="1">full time 1</option>
-											<option value="2">part time 2</option>
-										</select>
+										  <button type="button" class="btn btn-outline-secondary btn-lg w-100 h-20">서버.네트워크.보안</button>
 									</div>
 								</div>
-								<div class="col-lg-12">
+								<div class="col-lg-12 p-2">
 									<div class="single_field">
-										<select class="wide">
-											<option data-display="Qualification">Qualification</option>
-											<option value="1">Qualification 1</option>
-											<option value="2">Qualification 2</option>
-										</select>
+										  <button type="button" class="btn btn-outline-secondary btn-lg w-100 h-20">데이터베이스.DBA</button>
 									</div>
 								</div>
-								<div class="col-lg-12">
+								<div class="col-lg-12 p-2">
 									<div class="single_field">
-										<select class="wide">
-											<option data-display="Gender">Gender</option>
-											<option value="1">male</option>
-											<option value="2">female</option>
-										</select>
+										  <button type="button" class="btn btn-outline-secondary btn-lg w-100 h-20">하드웨어.소프트웨어</button>
+									</div>
+								</div>
+								<div class="col-lg-12 p-2">
+									<div class="single_field">
+										  <button type="button" class="btn btn-outline-secondary btn-lg w-100 h-20">ERP.시스템분석.설계</button>
+									</div>
+								</div>
+								<div class="col-lg-12 p-2">
+									<div class="single_field">
+										  <button type="button" class="btn btn-outline-secondary btn-lg w-100 h-20">통신.모바일</button>
 									</div>
 								</div>
 							</div>
@@ -106,208 +101,37 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="job_lists m-0">
 					<div class="row">
-						<div class="col-lg-12 col-md-12">
-							<div class="single_jobs white-bg d-flex justify-content-between">
-								<div class="jobs_left d-flex align-items-center">
-									<div class="thumb">
-										<img src="img/svg_icon/1.svg" alt="">
-									</div>
-									<div class="jobs_conetent">
-										<a href="job_details.html"><h4>Software Engineer</h4></a>
-										<div class="links_locat d-flex align-items-center">
-											<div class="location">
-												<p>
-													<i class="fa fa-map-marker"></i> California, USA
-												</p>
-											</div>
-											<div class="location">
-												<p>
-													<i class="fa fa-clock-o"></i> Part-time
-												</p>
+						<c:forEach var="job" items="${jobs}">
+							<div class="col-lg-12 col-md-12">
+								<div class="single_jobs white-bg d-flex justify-content-between">
+									<div class="jobs_left d-flex align-items-center">
+										<div class="thumb">
+											<img src="${job.image}" alt="">
+										</div>
+										<div class="jobs_conetent ml-2">
+											<a href="http://www.saramin.co.kr${job.href}"><h4 style="Roboto;">${job.title}</h4></a>
+											<div class="links_locat d-flex align-items-center">
+												<div class="location">
+													<p>
+														<i class="fa fa-map-marker"></i> ${job.companyName}
+													</p>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-								<div class="jobs_right">
-									<div class="apply_now">
-										<a class="heart_mark" href="#"> <i class="fa fa-heart"></i>
-										</a> <a href="job_details.html" class="boxed-btn3">Apply Now</a>
-									</div>
-									<div class="date">
-										<p>Date line: 31 Jan 2020</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-12 col-md-12">
-							<div class="single_jobs white-bg d-flex justify-content-between">
-								<div class="jobs_left d-flex align-items-center">
-									<div class="thumb">
-										<img src="img/svg_icon/2.svg" alt="">
-									</div>
-									<div class="jobs_conetent">
-										<a href="job_details.html"><h4>Digital Marketer</h4></a>
-										<div class="links_locat d-flex align-items-center">
-											<div class="location">
-												<p>
-													<i class="fa fa-map-marker"></i> California, USA
-												</p>
-											</div>
-											<div class="location">
-												<p>
-													<i class="fa fa-clock-o"></i> Part-time
-												</p>
-											</div>
+									<div class="jobs_right">
+										<div class="apply_now">
+											</a> <a href="http://www.saramin.co.kr${job.href}" class="boxed-btn3">Apply Now</a>
+										</div>
+										<div class="date">
+											<p>${job.deadLine}</p>
 										</div>
 									</div>
 								</div>
-								<div class="jobs_right">
-									<div class="apply_now">
-										<a class="heart_mark" href="#"> <i class="fa fa-heart"></i>
-										</a> <a href="job_details.html" class="boxed-btn3">Apply Now</a>
-									</div>
-									<div class="date">
-										<p>Date line: 31 Jan 2020</p>
-									</div>
-								</div>
 							</div>
-						</div>
-						<div class="col-lg-12 col-md-12">
-							<div class="single_jobs white-bg d-flex justify-content-between">
-								<div class="jobs_left d-flex align-items-center">
-									<div class="thumb">
-										<img src="img/svg_icon/3.svg" alt="">
-									</div>
-									<div class="jobs_conetent">
-										<a href="job_details.html"><h4>Wordpress Developer</h4></a>
-										<div class="links_locat d-flex align-items-center">
-											<div class="location">
-												<p>
-													<i class="fa fa-map-marker"></i> California, USA
-												</p>
-											</div>
-											<div class="location">
-												<p>
-													<i class="fa fa-clock-o"></i> Part-time
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="jobs_right">
-									<div class="apply_now">
-										<a class="heart_mark" href="#"> <i class="fa fa-heart"></i>
-										</a> <a href="job_details.html" class="boxed-btn3">Apply Now</a>
-									</div>
-									<div class="date">
-										<p>Date line: 31 Jan 2020</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-12 col-md-12">
-							<div class="single_jobs white-bg d-flex justify-content-between">
-								<div class="jobs_left d-flex align-items-center">
-									<div class="thumb">
-										<img src="img/svg_icon/4.svg" alt="">
-									</div>
-									<div class="jobs_conetent">
-										<a href="job_details.html"><h4>Visual Designer</h4></a>
-
-										<div class="links_locat d-flex align-items-center">
-											<div class="location">
-												<p>
-													<i class="fa fa-map-marker"></i> California, USA
-												</p>
-											</div>
-											<div class="location">
-												<p>
-													<i class="fa fa-clock-o"></i> Part-time
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="jobs_right">
-									<div class="apply_now">
-										<a class="heart_mark" href="#"> <i class="fa fa-heart"></i>
-										</a> <a href="job_details.html" class="boxed-btn3">Apply Now</a>
-									</div>
-									<div class="date">
-										<p>Date line: 31 Jan 2020</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-12 col-md-12">
-							<div class="single_jobs white-bg d-flex justify-content-between">
-								<div class="jobs_left d-flex align-items-center">
-									<div class="thumb">
-										<img src="img/svg_icon/5.svg" alt="">
-									</div>
-									<div class="jobs_conetent">
-										<a href="job_details.html"><h4>Software Engineer</h4></a>
-										<div class="links_locat d-flex align-items-center">
-											<div class="location">
-												<p>
-													<i class="fa fa-map-marker"></i> California, USA
-												</p>
-											</div>
-											<div class="location">
-												<p>
-													<i class="fa fa-clock-o"></i> Part-time
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="jobs_right">
-									<div class="apply_now">
-										<a class="heart_mark" href="#"> <i class="fa fa-heart"></i>
-										</a> <a href="job_details.html" class="boxed-btn3">Apply Now</a>
-									</div>
-									<div class="date">
-										<p>Date line: 31 Jan 2020</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-12 col-md-12">
-							<div class="single_jobs white-bg d-flex justify-content-between">
-								<div class="jobs_left d-flex align-items-center">
-									<div class="thumb">
-										<img src="img/svg_icon/1.svg" alt="">
-									</div>
-									<div class="jobs_conetent">
-										<a href="job_details.html"><h4>Creative Designer</h4></a>
-										<div class="links_locat d-flex align-items-center">
-											<div class="location">
-												<p>
-													<i class="fa fa-map-marker"></i> California, USA
-												</p>
-											</div>
-											<div class="location">
-												<p>
-													<i class="fa fa-clock-o"></i> Part-time
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="jobs_right">
-									<div class="apply_now">
-										<a class="heart_mark" href="#"> <i class="fa fa-heart"></i>
-										</a> <a href="job_details.html" class="boxed-btn3">Apply Now</a>
-									</div>
-									<div class="date">
-										<p>Date line: 31 Jan 2020</p>
-									</div>
-								</div>
-							</div>
-						</div>
+						</c:forEach>
 					</div>
 					<div class="row">
 						<div class="col-lg-12">

@@ -31,8 +31,7 @@ public class BoardController {
 	
 	@GetMapping("/board/categoryList/{num}")
 	public String categoryList(@PathVariable int num, Model model) {
-
-		boardService.카테고리별목록보기(num);
+		model.addAttribute("jobs", boardService.카테고리별목록보기(num));
 		return "/board/categoryList";
 	}
 

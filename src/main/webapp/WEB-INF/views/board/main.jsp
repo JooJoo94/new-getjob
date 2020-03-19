@@ -1,23 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@include file="../include/nav.jsp"%>
 
 <!-- catagory_area -->
 <div class="catagory_area">
 	<div class="container">
 		<div class="row cat_search">
-			<div class="col-lg-3 col-md-4">
+			<div class="col-lg-6 col-md-8">
 				<div class="single_input">
-					<input type="text" placeholder="Search keyword" />
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-4">
-				<div class="single_input">
-					<select class="wide">
-						<option data-display="Location">Location</option>
-						<option value="1">Dhaka</option>
-						<option value="2">Rangpur</option>
-						<option value="4">Sylet</option>
-					</select>
+					<input type="text" id="searchWord" placeholder="검색어" />
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-4">
@@ -32,7 +23,7 @@
 			</div>
 			<div class="col-lg-3 col-md-12">
 				<div class="job_btn">
-					<a href="#" class="boxed-btn3">Find Job</a>
+					<a id="search--submit" class="boxed-btn3">Find Job</a>
 				</div>
 			</div>
 		</div>
@@ -137,36 +128,38 @@
 		</div>
 		<div class="job_lists">
 			<div class="row">
-			<c:forEach var="board" items="${boards}">		
-				<div class="col-lg-12 col-md-12">
-					<div class="single_jobs white-bg d-flex justify-content-between">
-						<div class="jobs_left d-flex align-items-center">
-							<div class="thumb">
-								<img src="${board.image}"style="width: 80px; height: 50px; float: left; padding: auto"/>
-							</div>
-							<div class="jobs_conetent">
-								<a href="http://www.saramin.co.kr${board.href}"><h4 style="font-family: "Roboto", sans-serif;">${board.title}</h4></a>
-								<div class="links_locat d-flex align-items-center">
-									<div class="location">
-										<p>
-											<i class="fas fa-building"></i>${board.companyName}
-										</p>
+				<c:forEach var="board" items="${boards}">
+					<div class="col-lg-12 col-md-12">
+						<div class="single_jobs white-bg d-flex justify-content-between">
+							<div class="jobs_left d-flex align-items-center">
+								<div class="thumb">
+									<img src="${board.image}"
+										style="width: 80px; height: 50px; float: left; padding: auto" />
+								</div>
+								<div class="jobs_conetent">
+									<a href="http://www.saramin.co.kr${board.href}"><h4
+											style="font-family:"Roboto", sans-serif;">${board.title}</h4></a>
+									<div class="links_locat d-flex align-items-center">
+										<div class="location">
+											<p>
+												<i class="fas fa-building"></i>${board.companyName}
+											</p>
+										</div>
+
 									</div>
-									
+								</div>
+							</div>
+							<div class="jobs_right">
+								<div class="apply_now">
+									</a> <a href="job_details.html" class="boxed-btn3">Apply Now</a>
+								</div>
+								<div class="date">
+									<p>${board.deadLine}</p>
 								</div>
 							</div>
 						</div>
-						<div class="jobs_right">
-							<div class="apply_now">
-								</a> <a href="job_details.html" class="boxed-btn3">Apply Now</a>
-							</div>
-							<div class="date">
-								<p>${board.deadLine}</p>
-							</div>
-						</div>
 					</div>
-				</div>
-				
+
 				</c:forEach>
 			</div>
 		</div>
@@ -236,5 +229,44 @@
 		</div>
 	</div>
 </div>
+<script>
+	$('#searc3h--submit').on('click', function() {
+
+		var data = $('#searchWord').val();
+
+		console.log(data);
+		$.ajax({
+			type : 'GET',
+			url : 'board/searchList/' + data,
+			data : JSON.stringify(data),
+			contentType : "application/json; charset=utf-8",
+			dataType : 'json'
+		}).done(function(r) {
+			if (r.statusCode == 200) {
+				alert('수정 성공');
+				location.href = '/';
+			} else {
+				alert('수정 실패');
+			}
+		}).fail(function(r) {
+			alert('수정 실패');
+		});
+
+	});
+
+	("#searchWord").on("propertychange change keyup paste input", function() {
+
+		var searchWord = $(this).val();
+		if (searchWord == oldsearchWord) {
+			return;
+		}
+
+		oldsearchWord = searchWord;
+		$('#search--submit').on('click', function() {
+			var searchWord = $('#searchWord').val();
+			$('#searchWord').attr('href', '/board/searchList/' + oldsearchWord);
+		});
+	});
+</script>
 <%@include file="../include/footer.jsp"%>
 <%@include file="../include/script.jsp"%>

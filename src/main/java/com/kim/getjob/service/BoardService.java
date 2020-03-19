@@ -73,4 +73,31 @@ public class BoardService {
 		}
 		return list;
 	}
+	
+	public List<RespListDto> 검색어목록보기(String searchWord) {
+		String url = "http://www.saramin.co.kr/zf_user/search?search_area=main&search_done="
+				+ "y&search_optional_item=n&searchType=default_mysearch&searchword="
+				+ searchWord;
+		List<RespListDto> list = new ArrayList<>();
+		
+		try {
+			Connection conn = Jsoup.connect(url).header("Content-Type", "text/html;charset=UTF-8").userAgent(USER_AGENT)
+					.method(Connection.Method.GET).ignoreContentType(true);
+
+			Document doc = conn.get();
+			Elements elements = doc.select("#recruit_info .item_recruit");
+			//System.out.println(elements);
+			for (Element el : elements) {					
+					RespListDto dto = new RespListDto();
+					dto.setTitle(el.select("a").attr("title"));
+					dto.setDeadLine(el.select("div.job_date span").text());
+					dto.setHref(el.select("a").attr("href"));
+					list.add(dto);
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

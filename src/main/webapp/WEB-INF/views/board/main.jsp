@@ -14,22 +14,31 @@
 			<div class="col-lg-3 col-md-4">
 				<div class="single_input">
 					<select class="wide">
-						<option data-display="Category">Category</option>
-						<option value="1">Category 1</option>
-						<option value="2">Category 2</option>
-						<option value="4">Category 3</option>
+						<option data-display="카테고리">전체</option>
+						<option value="1">웹 개발</option>
+						<option value="2">응용프로그램 개발</option>
+						<option value="3">시스템 개발</option>
+						<option value="4">서버.네트워크.보안</option>
+						<option value="5">데이터베이스.DBA</option>
+						<option value="6">하드웨어.소프트웨어</option>
+						<option value="7">ERP.시스템분석.설계</option>
+						<option value="8">통신.모바일</option>
 					</select>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-12">
 				<div class="job_btn">
-					<a id="search--submit" class="boxed-btn3">Find Job</a>
+					<a id="search--submit" class="boxed-btn3">검색</a>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <!--/ catagory_area -->
+
+<form id="searchForm" action="/board/searchList" method="GET">
+	<input type="hidden" name="wordSubmit" id="wordSubmit" />
+</form>
 
 <!-- popular_catagory_area_start  -->
 <div class="popular_catagory_area">
@@ -46,7 +55,7 @@
 				<div class="single_catagory">
 					<a href="board/categoryList/404"><h4>웹 개발</h4></a>
 					<p>
-						<span>50</span> Available position
+						<span>3068</span>position
 					</p>
 				</div>
 			</div>
@@ -54,7 +63,7 @@
 				<div class="single_catagory">
 					<a href="board/categoryList/407"><h4>응용프로그램 개발</h4></a>
 					<p>
-						<span>50</span> Available position
+						<span>3512</span>position
 					</p>
 				</div>
 			</div>
@@ -62,7 +71,7 @@
 				<div class="single_catagory">
 					<a href="board/categoryList/408"><h4>시스템 개발</h4></a>
 					<p>
-						<span>50</span> Available position
+						<span>496</span>position
 					</p>
 				</div>
 			</div>
@@ -70,7 +79,7 @@
 				<div class="single_catagory">
 					<a href="board/categoryList/402"><h4>서버.네트워크.보안</h4></a>
 					<p>
-						<span>50</span> Available position
+						<span>2144</span>position
 					</p>
 				</div>
 			</div>
@@ -78,7 +87,7 @@
 				<div class="single_catagory">
 					<a href="board/categoryList/416"><h4>데이터베이스.DBA</h4></a>
 					<p>
-						<span>50</span> Available position
+						<span>685</span>position
 					</p>
 				</div>
 			</div>
@@ -86,7 +95,7 @@
 				<div class="single_catagory">
 					<a href="board/categoryList/409"><h4>ERP.시스템분석.설계</h4></a>
 					<p>
-						<span>50</span> Available position
+						<span>2115</span> position
 					</p>
 				</div>
 			</div>
@@ -94,7 +103,7 @@
 				<div class="single_catagory">
 					<a href="board/categoryList/411"><h4>하드웨어.소프트웨어</h4></a>
 					<p>
-						<span>50</span> Available position
+						<span>568</span>position
 					</p>
 				</div>
 			</div>
@@ -102,7 +111,7 @@
 				<div class="single_catagory">
 					<a href="board/categoryList/410"><h4>통신.모바일</h4></a>
 					<p>
-						<span>50</span> Available position
+						<span>616</span> position
 					</p>
 				</div>
 			</div>
@@ -137,8 +146,7 @@
 										style="width: 80px; height: 50px; float: left; padding: auto" />
 								</div>
 								<div class="jobs_conetent">
-									<a href="http://www.saramin.co.kr${board.href}"><h4
-											style="font-family:"Roboto", sans-serif;">${board.title}</h4></a>
+									<a href="http://www.saramin.co.kr${board.href}"><h4>${board.title}</h4></a>
 									<div class="links_locat d-flex align-items-center">
 										<div class="location">
 											<p>
@@ -151,7 +159,7 @@
 							</div>
 							<div class="jobs_right">
 								<div class="apply_now">
-									</a> <a href="job_details.html" class="boxed-btn3">Apply Now</a>
+									</a> <a href="job_details.html" class="boxed-btn3">지원하기</a>
 								</div>
 								<div class="date">
 									<p>${board.deadLine}</p>
@@ -229,44 +237,16 @@
 		</div>
 	</div>
 </div>
+
 <script>
-	$('#searc3h--submit').on('click', function() {
+	$('#search--submit').on('click', function() {
 
+		var jobForm = $('#searchForm');
 		var data = $('#searchWord').val();
-
-		console.log(data);
-		$.ajax({
-			type : 'GET',
-			url : 'board/searchList/' + data,
-			data : JSON.stringify(data),
-			contentType : "application/json; charset=utf-8",
-			dataType : 'json'
-		}).done(function(r) {
-			if (r.statusCode == 200) {
-				alert('수정 성공');
-				location.href = '/';
-			} else {
-				alert('수정 실패');
-			}
-		}).fail(function(r) {
-			alert('수정 실패');
-		});
-
-	});
-
-	("#searchWord").on("propertychange change keyup paste input", function() {
-
-		var searchWord = $(this).val();
-		if (searchWord == oldsearchWord) {
-			return;
-		}
-
-		oldsearchWord = searchWord;
-		$('#search--submit').on('click', function() {
-			var searchWord = $('#searchWord').val();
-			$('#searchWord').attr('href', '/board/searchList/' + oldsearchWord);
-		});
+		$('#wordSubmit').attr('value', data);
+		jobForm.submit();
 	});
 </script>
+
 <%@include file="../include/footer.jsp"%>
 <%@include file="../include/script.jsp"%>

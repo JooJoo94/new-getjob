@@ -43,7 +43,7 @@
 							<tr>
 								<td>${education.startYear} - ${education.endYear}</td>
 								<td>졸업</td>
-								<td>${educationItem.schoolName}</td>
+								<td>${education.schoolName}</td>
 								<td></td>
 								<td></td>
 							</tr>

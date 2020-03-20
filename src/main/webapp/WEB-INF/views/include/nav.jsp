@@ -45,7 +45,7 @@
 						<div class="row align-items-center">
 							<div class="col-xl-3 col-lg-2">
 								<div class="logo">
-									<a href="index.html"> <img src="/img/logo.png" alt="" />
+									<a href="/"> <img src="/img/logo.png" alt="" />
 									</a>
 								</div>
 							</div>
@@ -54,18 +54,27 @@
 									<nav>
 										<ul id="navigation">
 											<li><a href="/">홈</a></li>
-											<li><a href="#">직무별 <i class="ti-angle-down"></i></a>
-												<ul class="submenu">
-													<li><a href="/resume/resumePreview">이력서보기 </a></li>
-													<li><a href="/resume/resumeList">이력서목록 </a></li>
-													<li><a href="elements.html">elements</a></li>
+											<li><a href="/">직무별 <i class="ti-angle-down"></i></a>
+												<ul class="submenu navUl" style="display: inline-block;">
+													<li id="navLi"><a href="board/categoryList/404">웹 개발 </a></li>
+													<li id="navLi"><a href="board/categoryList/407">응용프로그램 개발 </a></li>
+													<li id="navLi"><a href="board/categoryList/408">시스템 개발 </a></li>
+													<li id="navLi"><a href="board/categoryList/402">서버.네트워크.보안</a></li>
+													<li id="navLi"><a href="board/categoryList/416">데이터베이스.DBA</a></li>
+													<li id="navLi"><a href="board/categoryList/411">하드웨어.소프트웨어</a></li>
+													<li id="navLi"><a href="board/categoryList/409">ERP.시스템분석.설계</a></li>
+													<li id="navLi"><a href="board/categoryList/410">통신.모바일</a></li>
 												</ul></li>
+											<c:choose>
+											<c:when test="${not empty sessionScope.principal}">
 											<li><a href="/resume/resumeList">나의 이력서 <i class="ti-angle-down"></i></a>
-												<ul class="submenu">
+												<ul class="submenu myResume">
 													<li><a href="/board/resume">이력서 작성</a></li>
-												</ul></li>										
-											<li><a href="contact.html">자기소개서</a></li>
-										</ul>
+													<li><a href="/resume/resumeList">이력서 목록</a></li>
+												</ul></li>
+											</c:when>
+											</c:choose>										
+										</ul>	
 									</nav>
 								</div>
 							</div>

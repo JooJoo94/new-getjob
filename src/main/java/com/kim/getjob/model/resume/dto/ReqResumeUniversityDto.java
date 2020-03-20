@@ -10,12 +10,11 @@ import lombok.NoArgsConstructor;
 public class ReqResumeUniversityDto {
 	
 	private int id;
-	private int level;
 	private String schoolName;
 	private String local;
 	private String major;
 	private String startYear;
 	private String endYear;
-	private int score;
+	private float score;
 
 }

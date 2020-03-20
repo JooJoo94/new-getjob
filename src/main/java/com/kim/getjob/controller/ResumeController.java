@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.kim.getjob.aop.warn.BindingAdvice;
 import com.kim.getjob.model.RespCM;
 import com.kim.getjob.model.resume.dto.ReqResumeWriteDto;
 import com.kim.getjob.model.user.User;
@@ -27,6 +26,14 @@ public class ResumeController {
 
 	@Autowired
 	private ResumeService resumeService;
+	
+	
+	@GetMapping("/board/resume")
+	public String resume(Model model) {
+		
+
+		return "/board/resume";
+	}
 	
 	@GetMapping("/resume/resumePreview/{id}")
 	public String resumeCheck(@PathVariable int id, Model model) {
@@ -68,7 +75,7 @@ public class ResumeController {
 		dto.getReqResumeBasicDto().setUserId(principal.getId());
 		int result = resumeService.이력서쓰기(dto);
 
-		if (result == 1) {
+		if (result == 1|| result == 2 || result == 3) {
 			return new ResponseEntity<RespCM>(new RespCM(200, "ok"), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<RespCM>(new RespCM(400, "fail"), HttpStatus.BAD_REQUEST);

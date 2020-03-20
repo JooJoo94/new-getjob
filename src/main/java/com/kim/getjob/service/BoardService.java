@@ -90,6 +90,7 @@ public class BoardService {
 			for (Element el : elements) {					
 					RespListDto dto = new RespListDto();
 					dto.setTitle(el.select("a").attr("title"));
+					dto.setCompanyName(el.select("div.area_corp span").text());
 					dto.setDeadLine(el.select("div.job_date span").text());
 					dto.setHref(el.select("a").attr("href"));
 					list.add(dto);

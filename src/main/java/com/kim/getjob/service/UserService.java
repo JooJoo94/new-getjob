@@ -20,9 +20,7 @@ public class UserService {
 	public int 회원가입(ReqJoinDto dto) {
 
 		try {
-			System.out.println("입력 : " + dto);
 			int result = userRepository.findByUserId(dto.getUserId());	
-			System.out.println("결과 = " + result);
 			if(result == 1) {
 				return ReturnCode.아이디중복;
 			}else {

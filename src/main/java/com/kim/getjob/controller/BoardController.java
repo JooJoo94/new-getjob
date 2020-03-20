@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kim.getjob.service.BoardService;
 
@@ -18,16 +19,9 @@ public class BoardController {
 	
 	@GetMapping({"", "/", "/board"})
 	public String posts(Model model) {
-		model.addAttribute("boards", boardService.목록보기());
-
-		return "/board/main";
-	}
-	
-	@GetMapping("/board/resume")
-	public String resume(Model model) {
 		
-
-		return "/board/resume";
+		model.addAttribute("boards", boardService.목록보기());
+		return "/board/main";
 	}
 	
 	@GetMapping("/board/categoryList/{num}")
@@ -36,9 +30,8 @@ public class BoardController {
 		return "/board/categoryList";
 	}
 
-	@GetMapping("/board/searchList/{searchWord}")
-	public String searchList(@PathVariable String searchWord, Model model) {
-		System.out.println("searchWord = " + searchWord);
+	@GetMapping("/board/searchList")
+	public String searchList(@RequestParam("wordSubmit") String searchWord, Model model) {
 		model.addAttribute("jobs", boardService.검색어목록보기(searchWord));
 		return "/board/searchList";
 	}

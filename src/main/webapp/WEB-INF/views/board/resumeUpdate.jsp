@@ -14,7 +14,7 @@
 					<form id="form1" class="multiForm">
 						<input type="hidden" name="id" value="${basic.id}"/>
 						<input type="hidden" name="userId" value = "${basic.userId}"/>
-						<input class="col-md-12 job_form_title" type="text" name = "title" value = "${basic.title}"
+						<input class="col-md-12 job_form_title" type="text" name = "title" value = "${basic.title}" 
 							placeholder="이력서 제목" />
 						<div class="row">
 							<div class="col-md-12">
@@ -126,32 +126,32 @@
 							</div>
 							<div class="col-md-12">
 								<div class="input_field">
-									<label class="col-md-2">학교명</label> <input class="col-md-9"
+									<label class="col-md-2">학교명</label> <input class="col-md-9" value="${university.schoolName}"
 										name="schoolName" type="text" placeholder="학교 입력">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="input_field">
-									<label class="col-md-2">지역</label> <input name="local"
+									<label class="col-md-2">지역</label> <input name="local" value="${university.local}"
 										class="col-md-9" type="text" placeholder="지역 입력">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="input_field">
-									<label class="col-md-2">전공</label> <input name="major"
+									<label class="col-md-2">전공</label> <input name="major" value="${university.major}"
 										class="col-md-9" type="text" placeholder="전공 입력">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="input_field">
-									<label class="col-md-2">재학기간</label><input name="startYear"
+									<label class="col-md-2">재학기간</label><input name="startYear" value="${university.startYear}"
 										id="startYear" class="col-md-4" type="text"
-										placeholder="입학 년도"> <input id="endYear"
+										placeholder="입학 년도"> <input id="endYear" value="${university.endYear}"
 										name="endYear" class="col-md-4" type="text"
 										placeholder="졸업 년도">
 								</div>
 								<div class="input_field">
-									<label class="col-md-2">학점</label> <input name="score"
+									<label class="col-md-2">학점</label> <input name="score" value="${university.score}"
 										class="col-md-5" type="text" placeholder="학점 입력"> <input
 										class="col-md-4" type="text" placeholder="/4.5"
 										readonly="readonly">

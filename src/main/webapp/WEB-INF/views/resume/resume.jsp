@@ -242,13 +242,13 @@
 			dataType : 'json'
 		}).done(function(r) {
 			if (r.statusCode == 200) {
-				alert('수정 성공');
+				alert('이력서 저장');
 				location.href = '/';
 			} else {
-				alert('수정 실패');
+				alert('저장 실패');
 			}
 		}).fail(function(r) {
-			alert('수정 실패');
+			alert('저장 실패');
 		});
 
 	});

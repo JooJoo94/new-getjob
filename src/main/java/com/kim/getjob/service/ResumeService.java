@@ -31,22 +31,23 @@ public class ResumeService {
 	private ResumeRepository resumeRepository;
 
 	public int 이력서쓰기(ReqResumeWriteDto dto) {
-
+		
 		ReqResumeBasicDto reqResumeBasicDto = dto.getReqResumeBasicDto();
-		resumeRepository.resumeSaveBasic(reqResumeBasicDto);
+		int result = resumeRepository.resumeSaveBasic(reqResumeBasicDto);
 
 		ReqResumeEducationDto reqEducationDto = dto.getReqResumeEducationDto();
+		
 		reqEducationDto.setId(reqResumeBasicDto.getId());
-		resumeRepository.resumeSaveEducation(reqEducationDto);
+		result += resumeRepository.resumeSaveEducation(reqEducationDto);
+		
 
 		if (dto.getReqResumeEducationDto().getLevel() == 4) {
-
 			ReqResumeUniversityDto reqUniversityDto = dto.getReqResumeUniversityDto();
 			reqUniversityDto.setId(reqResumeBasicDto.getId());
-			resumeRepository.resumeSaveUniversity(reqUniversityDto);
+			result += resumeRepository.resumeSaveUniversity(reqUniversityDto);
 		}
 
-		return resumeRepository.resumeSaveBasic(reqResumeBasicDto);
+		return result;
 	}
 
 	// 나의 이력서 목록

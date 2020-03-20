@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../include/nav.jsp"%>
-<style type="text/css">
-@import url("https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap");
-h4 {
-  font-family: "Roboto", sans-serif;
-  font-weight: normal;
-  font-style: normal;
-}
-</style>
 
 <!-- job_listing_area_start  -->
 <div class="job_listing_area plus_padding">
@@ -26,43 +18,46 @@ h4 {
 									</div>
 								</div>
 								<div class="col-lg-12 p-2">
-									<div class="single_field">
-										  <button type="button" class="btn btn-outline-secondary btn-lg w-100 h-20">웹 개발</button>
+									<div class="job_btn">
+										<a id="searchCategory" href="404" class="categoryBtn btn-lg">웹
+											개발</a>
 									</div>
 								</div>
 								<div class="col-lg-12 p-2">
-									<div class="single_field">
-										  <button type="button" class="btn btn-outline-secondary btn-lg w-100 h-20">응용프로그램 개발</button>
+									<div class="job_btn">
+										<a id="searchCategory" href="407" class="categoryBtn btn-lg">응용프로그램
+											개발</a>
 									</div>
 								</div>
 								<div class="col-lg-12 p-2">
-									<div class="single_field">
-										  <button type="button" class="btn btn-outline-secondary btn-lg w-100 h-20">시스템 개발</button>
+									<div class="job_btn">
+										<a id="searchCategory" href="408" class="categoryBtn btn-lg">시스템
+											개발</a>
 									</div>
 								</div>
 								<div class="col-lg-12 p-2">
-									<div class="single_field">
-										  <button type="button" class="btn btn-outline-secondary btn-lg w-100 h-20">서버.네트워크.보안</button>
+									<div class="job_btn">
+										<a id="searchCategory" href="402" class="categoryBtn btn-lg">서버.네트워크.보안</a>
 									</div>
 								</div>
 								<div class="col-lg-12 p-2">
-									<div class="single_field">
-										  <button type="button" class="btn btn-outline-secondary btn-lg w-100 h-20">데이터베이스.DBA</button>
+									<div class="job_btn">
+										<a id="searchCategory" href="416" class="categoryBtn btn-lg">데이터베이스.DBA</a>
 									</div>
 								</div>
 								<div class="col-lg-12 p-2">
-									<div class="single_field">
-										  <button type="button" class="btn btn-outline-secondary btn-lg w-100 h-20">하드웨어.소프트웨어</button>
+									<div class="job_btn">
+										<a id="searchCategory" href="411" class="categoryBtn btn-lg">하드웨어.소프트웨어</a>
 									</div>
 								</div>
 								<div class="col-lg-12 p-2">
-									<div class="single_field">
-										  <button type="button" class="btn btn-outline-secondary btn-lg w-100 h-20">ERP.시스템분석.설계</button>
+									<div class="job_btn">
+										<a id="searchCategory" href="409" class="categoryBtn btn-lg">ERP.시스템분석.설계</a>
 									</div>
 								</div>
 								<div class="col-lg-12 p-2">
-									<div class="single_field">
-										  <button type="button" class="btn btn-outline-secondary btn-lg w-100 h-20">통신.모바일</button>
+									<div class="job_btn">
+										<a id="searchCategory" href="410" class="categoryBtn btn-lg">통신.모바일</a>
 									</div>
 								</div>
 							</div>
@@ -86,7 +81,7 @@ h4 {
 					<div class="recent_joblist white-bg ">
 						<div class="row align-items-center">
 							<div class="col-md-6">
-								<h4>Job Listing</h4>
+								<h4><strong>채용공고</strong></h4>
 							</div>
 							<div class="col-md-6">
 								<div class="serch_cat d-flex justify-content-end">
@@ -111,7 +106,7 @@ h4 {
 											<img src="${job.image}" alt="">
 										</div>
 										<div class="jobs_conetent ml-2">
-											<a href="http://www.saramin.co.kr${job.href}"><h4 style="Roboto;">${job.title}</h4></a>
+											<a href="http://www.saramin.co.kr${job.href}"><h4>${job.title}</h4></a>
 											<div class="links_locat d-flex align-items-center">
 												<div class="location">
 													<p>
@@ -123,7 +118,8 @@ h4 {
 									</div>
 									<div class="jobs_right">
 										<div class="apply_now">
-											</a> <a href="http://www.saramin.co.kr${job.href}" class="boxed-btn3">Apply Now</a>
+											<a href="http://www.saramin.co.kr${job.href}"
+												class="boxed-btn3">지원하기</a>
 										</div>
 										<div class="date">
 											<p>${job.deadLine}</p>
@@ -152,6 +148,13 @@ h4 {
 		</div>
 	</div>
 </div>
+
+<script>
+	$('#searchCategory').on('click', function() {
+		history.replaceState({}, null, location.pathname);
+	});
+</script>
+
 <!-- job_listing_area_end  -->
 <%@include file="../include/footer.jsp"%>
 <%@include file="../include/script.jsp"%>

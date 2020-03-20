@@ -23,8 +23,8 @@
 	</insert>
 	
 	<insert id="resumeSaveUniversity">
-		insert into resume_university(id, level, schoolName, local, major, startYear, endYear, score) 
-		values(#{id}, #{level}, #{schoolName},#{local},#{startYear},#{endYear}, #{score})
+		insert into resume_university(id, schoolName, local, major, startYear, endYear, score) 
+		values(#{id},#{schoolName},#{local}, #{major}, #{startYear},#{endYear}, #{score})
 	</insert>
 	
 	<select id="resumeBasicfindByUserId" resultType="com.kim.getjob.model.resume.dto.RespResumeBasicDto">
@@ -55,7 +55,7 @@
 	</update> 
 	
 	<update id="resumeUniversityUpdate">
-		update resume_university set level=#{level}, schoolName=#{schoolName}, local=#{local}, major=#{major}, startYear=#{startYear}, 
+		update resume_university set schoolName=#{schoolName}, local=#{local}, major=#{major}, startYear=#{startYear}, 
 		endYear=#{endYear}, score=#{score} where id = #{id}
 	</update> 
 </mapper>

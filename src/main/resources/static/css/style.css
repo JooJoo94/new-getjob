@@ -31,6 +31,33 @@ body {
   font-style: normal;
 }
 
+.navUl li {
+	list-style-type: none;
+	float: left;
+	margin: 5px;
+	display: inline-block;
+}
+
+.categoryBtn {
+	font-family: "Roboto", sans-serif;
+	border-radius:10px;
+    width:100%;
+    background-color: none;
+    border: 2px solid #c0c0c0;
+    color:#000040;
+    padding: 10px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px;
+    cursor: pointer;
+}
+
+.categoryBtn:hover {
+    background-color: #c0c0c0;
+}
+
 /* line 13, ../../Arafath/CL/December/235. Job board/HTML/scss/theme-default.scss */
 .img {
   max-width: 100%;
@@ -1215,7 +1242,7 @@ h3 {
   left: 0;
   top: 120%;
   background: #fff;
-  width: 200px;
+  width: 600px;
   z-index: 2;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.02);
   opacity: 0;
@@ -1227,6 +1254,22 @@ h3 {
   transition: 0.6s;
 }
 
+.header-area .main-header-area .main-menu ul li .myResume {
+  position: absolute;
+  left: 0;
+  top: 120%;
+  background: #fff;
+  width: 150px;
+  z-index: 2;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.02);
+  opacity: 0;
+  visibility: hidden;
+  text-align: center;
+  -webkit-transition: 0.6s;
+  -moz-transition: 0.6s;
+  -o-transition: 0.6s;
+  transition: 0.6s;
+}
 /* line 240, ../../Arafath/CL/December/235. Job board/HTML/scss/_header.scss */
 .header-area .main-header-area .main-menu ul li .submenu li {
   display: block;

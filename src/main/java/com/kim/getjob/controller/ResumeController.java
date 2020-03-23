@@ -28,11 +28,10 @@ public class ResumeController {
 	private ResumeService resumeService;
 	
 	
-	@GetMapping("/board/resume")
-	public String resume(Model model) {
-		
+	@GetMapping("/resume/write")
+	public String resume() {		
 
-		return "/board/resume";
+		return "/resume/write";
 	}
 	
 	@GetMapping("/resume/resumePreview/{id}")
@@ -45,19 +44,19 @@ public class ResumeController {
 			model.addAttribute("university", resumeService.University이력서(id));
 		}
 		
-		return "/board/resumePreview";
+		return "/resume/preview";
 	}
 	
-	@GetMapping("/resume/resumeList")
+	@GetMapping("/resume/list")
 	public String resumeList(Model model) {
 		
 		User principal = (User) session.getAttribute("principal");
 		model.addAttribute("resumes", resumeService.이력서목록보기(principal.getId()));
 
-		return "/board/resumeList";
+		return "/resume/list";
 	}
 	
-	@GetMapping("/resume/resumeUpdate/{id}")
+	@GetMapping("/resume/update/{id}")
 	public String update(@PathVariable int id, Model model) {
 		
 		model.addAttribute("basic", resumeService.basic이력서(id));
@@ -65,7 +64,7 @@ public class ResumeController {
 		if(resumeService.education이력서(id).getLevel()==4) {
 			model.addAttribute("university", resumeService.University이력서(id));
 		}
-		return "/board/resumeUpdate";
+		return "/resume/update";
 	}
 
 	@PostMapping("/resume/write")

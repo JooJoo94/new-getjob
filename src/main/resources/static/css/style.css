@@ -38,6 +38,7 @@ body {
 	display: inline-block;
 }
 
+/* myCSS 시작 */
 .categoryBtn {
 	font-family: "Roboto", sans-serif;
 	border-radius:10px;
@@ -57,6 +58,18 @@ body {
 .categoryBtn:hover {
     background-color: #c0c0c0;
 }
+
+.joinForm input.error, textarea.error {
+	border: 2px solid red;
+}
+
+.joinForm label.error {
+	display: block;
+	color: red;
+}
+
+/* myCSS 끝 */
+
 
 /* line 13, ../../Arafath/CL/December/235. Job board/HTML/scss/theme-default.scss */
 .img {

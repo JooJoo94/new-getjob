@@ -67,10 +67,10 @@
 												</ul></li>
 											<c:choose>
 											<c:when test="${not empty sessionScope.principal}">
-											<li><a href="/resume/resumeList">나의 이력서 <i class="ti-angle-down"></i></a>
+											<li><a href="/resume/list">나의 이력서 <i class="ti-angle-down"></i></a>
 												<ul class="submenu myResume">
-													<li><a href="/board/resume">이력서 작성</a></li>
-													<li><a href="/resume/resumeList">이력서 목록</a></li>
+													<li><a href="/resume/write">이력서 작성</a></li>
+													<li><a href="/resume/list">이력서 목록</a></li>
 												</ul></li>
 											</c:when>
 											</c:choose>										

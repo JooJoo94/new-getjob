@@ -22,12 +22,12 @@
 							<div class="single_jobs white-bg d-flex justify-content-between">
 								<div class="jobs_left d-flex align-items-center">
 									<div class="jobs_conetent">
-										<a href="/resume/resumePreview/${resume.id}"><h4>${resume.title}</h4></a>
+										<a href="/resume/preview/${resume.id}"><h4>${resume.title}</h4></a>
 									</div>
 								</div>
 								<div class="jobs_right">
 									<div class="apply_now">
-										<a href="/resume/resumeUpdate/${resume.id}" class="boxed-btn3">수정하기</a>
+										<a href="/resume/update/${resume.id}" class="boxed-btn3">수정하기</a>
 									</div>
 									<div class="date">
 										<p>${resume.createDate}</p>

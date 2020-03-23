@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../include/nav.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="../include/nav.jsp"%>
 
 <section class="section_padding p-5">
 	<div class="container">
@@ -12,49 +13,48 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="form-group">
-								<label for="userName">이름</label> 
-								<input class="form-control" id="userName" type="text"
-									 placeholder="이름을 입력하세요" />
+								<label for="userName">이름</label> <input class="form-control"
+									id="userName" type="text" name="userName"
+									placeholder="이름을 입력하세요" /> <label id="passwordError"></label>
 							</div>
 						</div>
 						<div class="col-sm-12">
 							<div class="form-group">
-								<label for="userId">아이디</label>
-								<button class="btn boxed-btn pull-right">중복확인</button>
-								<input class="form-control" id="userId" type="text"
-									 placeholder="아이디를 입력하세요" />
+								<label for="userId">아이디</label> <input class="form-control"
+									id="userId" type="text" name="userId" placeholder="아이디를 입력하세요" />
 							</div>
 						</div>
 						<br />
 						<div class="col-sm-12">
 							<div class="form-group">
-								<label for="password">비밀번호</label> 
-								<input class="form-control" id="password" type="password" 
-								placeholder="비밀번호를 입력하세요" />
+								<label for="password">비밀번호</label> <input class="form-control"
+									id="password" type="password" name="password"
+									placeholder="비밀번호를 입력하세요" />
 							</div>
 						</div>
 						<div class="col-sm-12">
 							<div class="form-group">
-								<label for="passwordCK">비밀번호 확인</label> 
-								<input class="form-control" id="passwordCK" type="password" 
-								placeholder="비밀번호를 다시 입력하세요" />
+								<label for="passwordCK">비밀번호 확인</label> <input
+									class="form-control" id="passwordCK" type="password"
+									name="passwordCK" placeholder="비밀번호를 다시 입력하세요" />
 							</div>
 						</div>
 						<div class="col-sm-12">
 							<div class="form-group">
-								<label for="email">이메일</label> <input class="form-control" id="email"
-									type="text"  placeholder="이메일을 입력하세요" />
+								<label for="email">이메일</label> <input class="form-control"
+									id="email" name="email" type="text" placeholder="이메일을 입력하세요" />
 							</div>
 						</div>
 						<div class="col-sm-12">
 							<div class="form-group">
-								<label for="phone">전화번호</label> <input class="form-control" id="phone"
-									type="text" placeholder="전화번호 입력하세요" />
+								<label for="phone">전화번호</label> <input class="form-control"
+									id="phone" name="phone" type="text" placeholder="전화번호 입력하세요" />
 							</div>
 						</div>
 					</div>
 					<div class="form-group mt-3">
-						<button type="submit" id="join--submit" class="button btn-block  button-contactForm btn_4 boxed-btn">
+						<button type="submit" id="join--submit"
+							class="button btn-block  button-contactForm btn_4 boxed-btn">
 							회원가입</button>
 					</div>
 				</form>
@@ -62,42 +62,38 @@
 		</div>
 	</div>
 </section>
-<%@include file="../include/script.jsp"%>
+<%@ include file="../include/script.jsp"%>
+<script src="/js/joinValidation.js"></script>
 <script>
-$('#join--submit').on('click', function() {
-	var data = {
-		userName : $('#userName').val(),
-		userId : $('#userId').val(), 
-		password : $('#password').val(),
-		email : $('#email').val(),
-		phone : $('#phone').val()
-	};
+	$('#join--submit').on('click', function() {
+		var data = {
+			userName : $('#userName').val(),
+			userId : $('#userId').val(),
+			password : $('#password').val(),
+			email : $('#email').val(),
+			phone : $('#phone').val()
+		};
 
-	$.ajax({
-		type : 'POST',
-		url : '/user/join',
-		data : JSON.stringify(data),
-		contentType : 'application/json; charset=utf-8',
-		dataType : 'json'
-	}).done(function(r) {
-		if (r.statusCode == 200) {
-			console.log(r);
-			alert('회원가입 성공');
-			location.href = '/user/login';
-		} else {
-			if (r.msg == '아이디중복') {
+		$.ajax({
+			type : 'POST',
+			url : '/user/join',
+			data : JSON.stringify(data),
+			contentType : 'application/json; charset=utf-8',
+			dataType : 'json'
+		}).done(function(r) {
+			if (r.statusCode == 200) {
 				console.log(r);
-				alert('아이디가 중복되었습니다.');
+				alert('회원가입 성공');
+				location.href = '/user/login';
 			} else {
 				console.log(r);
 				alert('회원가입 실패');
 			}
-		}
-	}).fail(function(r) {
-		var message = JSON.parse(r.responseText);
-		console.log((message));
-		alert('서버 오류');
+		}).fail(function(r) {
+			var message = JSON.parse(r.responseText);
+			console.log(message);
+		});
+
 	});
-});
 </script>
 <%@include file="../include/footer.jsp"%>

@@ -170,6 +170,20 @@
 
 				</c:forEach>
 			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="pagination_wrap">
+						<ul>
+							<li><a href="#"> <i class="ti-angle-left"></i>
+							</a></li>
+							<li><a href="#"><span>01</span></a></li>
+							<li><a href="#"><span>02</span></a></li>
+							<li><a href="#"> <i class="ti-angle-right"></i>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -241,10 +255,10 @@
 <script>
 	$('#search--submit').on('click', function() {
 
-		var jobForm = $('#searchForm');
+		var searchForm = $('#searchForm');
 		var data = $('#searchWord').val();
 		$('#wordSubmit').attr('value', data);
-		jobForm.submit();
+		searchForm.submit();
 	});
 </script>
 

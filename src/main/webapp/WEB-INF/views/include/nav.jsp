@@ -19,7 +19,8 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!-- CSS here -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <link rel="stylesheet" href="/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/css/owl.carousel.min.css" />
 <link rel="stylesheet" href="/css/magnific-popup.css" />
@@ -56,9 +57,12 @@
 											<li><a href="/">홈</a></li>
 											<li><a href="/">직무별 <i class="ti-angle-down"></i></a>
 												<ul class="submenu navUl" style="display: inline-block;">
-													<li id="navLi"><a href="board/categoryList/404">웹 개발 </a></li>
-													<li id="navLi"><a href="board/categoryList/407">응용프로그램 개발 </a></li>
-													<li id="navLi"><a href="board/categoryList/408">시스템 개발 </a></li>
+													<li id="navLi"><a href="board/categoryList/404">웹
+															개발 </a></li>
+													<li id="navLi"><a href="board/categoryList/407">응용프로그램
+															개발 </a></li>
+													<li id="navLi"><a href="board/categoryList/408">시스템
+															개발 </a></li>
 													<li id="navLi"><a href="board/categoryList/402">서버.네트워크.보안</a></li>
 													<li id="navLi"><a href="board/categoryList/416">데이터베이스.DBA</a></li>
 													<li id="navLi"><a href="board/categoryList/411">하드웨어.소프트웨어</a></li>
@@ -66,15 +70,19 @@
 													<li id="navLi"><a href="board/categoryList/410">통신.모바일</a></li>
 												</ul></li>
 											<c:choose>
-											<c:when test="${not empty sessionScope.principal}">
-											<li><a href="/resume/list">나의 이력서 <i class="ti-angle-down"></i></a>
-												<ul class="submenu myResume">
-													<li><a href="/resume/write">이력서 작성</a></li>
-													<li><a href="/resume/list">이력서 목록</a></li>
-												</ul></li>
-											</c:when>
-											</c:choose>										
-										</ul>	
+												<c:when test="${not empty sessionScope.principal}">
+													<li><a href="/resume/list">나의 이력서 <i
+															class="ti-angle-down"></i></a>
+														<ul class="submenu myResume">
+															<li><a href="/resume/write">이력서 작성</a></li>
+															<li><a href="/resume/list">이력서 목록</a></li>
+															<li><a
+																href="/user/profile/${sessionScope.principal.id}">회원정보
+																	수정</a></li>
+														</ul></li>
+												</c:when>
+											</c:choose>
+										</ul>
 									</nav>
 								</div>
 							</div>
@@ -84,7 +92,13 @@
 									<div class="col-xl-3 col-lg-3 d-none d-lg-block">
 										<div class="Appointment">
 											<div class="phone_num d-none d-xl-block">
-												<a>${sessionScope.principal.userName} <strong>님</strong></a>
+												<img class="rounded-circle my__img mr-1"
+													src="/media/${sessionScope.principal.profile}"
+													width="30px" height="30px" style="border: 2px solid #00d363"
+													onerror="javascript:this.src = '/images/unknown.jpg'" /> 
+													<a>${sessionScope.principal.userName}
+													<strong>님</strong>
+												</a>
 											</div>
 											<div class="phone_num d-none d-xl-block">
 												<a href="/user/logout">로그아웃</a>

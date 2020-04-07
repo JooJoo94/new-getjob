@@ -4,11 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kim.getjob.model.board.Criteria;
+import com.kim.getjob.model.board.PageMaker;
 import com.kim.getjob.service.BoardService;
 
 @Controller
@@ -19,7 +20,6 @@ public class BoardController {
 	
 	@GetMapping({"", "/", "/board"})
 	public String posts(Model model) {
-		
 		model.addAttribute("boards", boardService.목록보기());
 		return "/board/main";
 	}

@@ -19,4 +19,14 @@
 		where userId = #{userId} and password=#{password}
 	</select>
 	
+	<select id="findById" resultType="com.kim.getjob.model.user.User">
+		select * from user where id=#{id}
+	</select>
+	
+	<update id="update">
+		update user set password = #{password}, email=#{email}, profile = #{profile} where id = #{id}
+	</update>
+	
+	
+	
 </mapper>

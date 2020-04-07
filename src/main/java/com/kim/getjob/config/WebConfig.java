@@ -24,13 +24,13 @@ public class WebConfig implements WebMvcConfigurer {
 				.resourceChain(true).addResolver(new PathResourceResolver());
 	}
 
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new SessionIntercepter()).addPathPatterns("/user/profile/**")
-				.addPathPatterns("/post/write/**").addPathPatterns("/post/update/**")
-				.addPathPatterns("/post/delete/**");
-
-		// addExcludePatterns() 제외 시킬 때 사용!!
-	}
-
+	/*
+	 * @Override public void addInterceptors(InterceptorRegistry registry) {
+	 * registry.addInterceptor(new
+	 * SessionIntercepter()).addPathPatterns("/user/profile/**")
+	 * .addPathPatterns("/post/write/**").addPathPatterns("/post/update/**")
+	 * .addPathPatterns("/post/delete/**");
+	 * 
+	 * // addExcludePatterns() 제외 시킬 때 사용!! }
+	 */
 }

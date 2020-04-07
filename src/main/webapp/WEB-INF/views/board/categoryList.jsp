@@ -81,7 +81,9 @@
 					<div class="recent_joblist white-bg ">
 						<div class="row align-items-center">
 							<div class="col-md-6">
-								<h4><strong>채용공고</strong></h4>
+								<h4>
+									<strong>채용공고</strong>
+								</h4>
 							</div>
 							<div class="col-md-6">
 								<div class="serch_cat d-flex justify-content-end">
@@ -148,12 +150,6 @@
 		</div>
 	</div>
 </div>
-
-<script>
-	$('#searchCategory').on('click', function() {
-		history.replaceState({}, null, location.pathname);
-	});
-</script>
 
 <!-- job_listing_area_end  -->
 <%@include file="../include/footer.jsp"%>

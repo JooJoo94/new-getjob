@@ -11,6 +11,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
+import com.kim.getjob.model.board.Criteria;
 import com.kim.getjob.model.board.RespListDto;
 
 @Service
@@ -26,7 +27,7 @@ public class BoardService {
 					.method(Connection.Method.GET).ignoreContentType(true);
 
 			Document doc = conn.get();
-			Elements element = doc.select("#_platinum li");
+			Elements element = doc.select("#_platinum li");			
 			for (Element el : element) {
 				RespListDto dto = new RespListDto();
 				dto.setImage(el.select("span.product_logo img").attr("src"));

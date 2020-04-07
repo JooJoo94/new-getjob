@@ -10,5 +10,7 @@ public interface UserRepository {
 	int save(ReqJoinDto dto);
 	int findByUserId(String userId);
 	User findByUsernameAndPassword(ReqLoginDto dto);
+	User findById(int id);
+	int update(int id, String password, String email, String profile);
 
 }

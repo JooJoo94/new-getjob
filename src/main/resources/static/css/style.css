@@ -67,6 +67,19 @@ body {
 	display: block;
 	color: red;
 }
+@media only screen and (max-width: 800px) {
+  .my__img {
+  	display: none;
+  	border: 3px solid red;
+
+  }
+}
+
+.my__profile {
+	margin-left: 5px;
+	margin-top: 5px;
+	font-size: 15px;
+}
 
 /* myCSS 끝 */
 

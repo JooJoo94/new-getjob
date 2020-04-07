@@ -1,5 +1,11 @@
 package com.kim.getjob.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.UUID;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -11,8 +17,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kim.getjob.model.RespCM;
 import com.kim.getjob.model.ReturnCode;
@@ -20,17 +31,17 @@ import com.kim.getjob.model.user.User;
 import com.kim.getjob.model.user.dto.ReqJoinDto;
 import com.kim.getjob.model.user.dto.ReqLoginDto;
 import com.kim.getjob.service.UserService;
-
+import com.kim.getjob.util.Script;
 
 @Controller
 public class UserController {
-	
+
 	@Value("${file.path}")
-	private String fileRealPath;  // 서버에 배포하면 경로 변경해야함.
+	private String fileRealPath; // 서버에 배포하면 경로 변경해야함.
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private HttpSession session;
 
@@ -39,19 +50,19 @@ public class UserController {
 
 		return "/user/login";
 	}
-	
+
 	@GetMapping("/user/logout")
 	public String logout() {
 		session.invalidate();
 		return "redirect:/";
 	}
-	
+
 	@PostMapping("/user/login")
 	public ResponseEntity<?> login(@Valid @RequestBody ReqLoginDto dto, BindingResult bindResult) {
 
 		// 서비스 호출
 		User principal = userService.로그인(dto);
-		
+
 		if (principal != null) {
 			session.setAttribute("principal", principal);
 			return new ResponseEntity<RespCM>(new RespCM(200, "ok"), HttpStatus.OK);
@@ -61,17 +72,27 @@ public class UserController {
 
 	}
 
-
 	@GetMapping("/user/join")
 	public String join(Model model) {
 
 		return "/user/join";
 	}
+	
+	@GetMapping("/user/profile/{id}")
+	public String profile(@PathVariable int id) {
+		User principal = (User)session.getAttribute("principal");
+		if(principal.getId()==id) {
+			return "/user/profile";
+		}else {
+			return "/user/login";
+		}
+		
+	}
 
 	@PostMapping("/user/join")
-	public ResponseEntity<?> join(@Valid @RequestBody ReqJoinDto dto, BindingResult bindingResult) {		
+	public ResponseEntity<?> join(@Valid @RequestBody ReqJoinDto dto, BindingResult bindingResult) {
 		int result = userService.회원가입(dto);
-		
+
 		if (result == ReturnCode.아이디중복) {
 			return new ResponseEntity<RespCM>(new RespCM(ReturnCode.아이디중복, "아이디중복"), HttpStatus.OK);
 		} else if (result == ReturnCode.성공) {
@@ -80,5 +101,28 @@ public class UserController {
 			return new ResponseEntity<RespCM>(new RespCM(500, "fail"), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@PutMapping("/user/profile")
+	public @ResponseBody String profile(@RequestParam int id, 
+										@RequestParam String password,
+										@RequestParam String email,
+										@RequestParam MultipartFile profile) {
+		UUID uuid = UUID.randomUUID();
+		String uuidFilename = uuid + "_" + profile.getOriginalFilename();
+		// nio 객체
+		Path filepath = Paths.get(fileRealPath+uuidFilename);
+		try {
+			Files.write(filepath, profile.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		int result = userService.수정완료(id, password, email, uuidFilename);
+		if(result==1) {
+			return Script.href("수정완료","/");
+		}else {
+			return Script.back("수정실패");
+		}
+	}
+
 
 }

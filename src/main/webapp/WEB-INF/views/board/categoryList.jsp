@@ -134,13 +134,27 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="pagination_wrap">
-								<ul>
-									<li><a href="#"> <i class="ti-angle-left"></i>
-									</a></li>
-									<li><a href="#"><span>01</span></a></li>
-									<li><a href="#"><span>02</span></a></li>
-									<li><a href="#"> <i class="ti-angle-right"></i>
-									</a></li>
+								<ul id="paginate">
+									<c:if test="${pageMaker.prev}">
+										<li><a href="${pageMaker.startPage-1}"> <i
+												class="ti-angle-left"></i>
+										</a></li>
+									</c:if>
+									<c:forEach begin="${pageMaker.startPage}"
+										end="${pageMaker.endPage}" var="i">
+										<c:choose>
+											<c:when test="${pageMaker.cri.page==i}">
+												<li><a href="#"><span>${i}</span></a></li>
+											</c:when>
+											<c:otherwise>
+												<li><a href="${i}"><span>${i}</span></a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+									<c:if test="${pageMaker.next}">
+										<li><a href="${pageMaker.endPage+1}"> <i class="ti-angle-right"></i>
+										</a></li>
+									</c:if>
 								</ul>
 							</div>
 						</div>
@@ -150,6 +164,27 @@
 		</div>
 	</div>
 </div>
+
+<form id="jobForm">
+	<input type="hidden" name="page" value="${pageMaker.cri.page}">
+	<input type="hidden" name="perPageNum"
+		value="${pageMaker.cri.perPageNum}">
+</form>
+
+<script>
+	var jobForm = $('#jobForm');
+
+	$('#pagenate a').on('click', function(event) {
+		// 원래 a 링크 클릭을 막는다
+		event.preventDefault();
+		//$(this) = 내가 이벤트 준 것
+		var targetPage = $(this).attr('href');
+		jobForm.find("[name='page']").val(targetPage);
+		jobForm.attr('action', '/list').attr('method', 'get');
+		jobForm.submit();
+	});
+
+</script>
 
 <!-- job_listing_area_end  -->
 <%@include file="../include/footer.jsp"%>

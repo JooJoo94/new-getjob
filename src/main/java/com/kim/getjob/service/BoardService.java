@@ -75,12 +75,11 @@ public class BoardService {
 		return list;
 	}
 	
-	public List<RespListDto> 검색어목록보기(String searchWord) {
+	public List<RespListDto> 검색어목록보기(String searchWord, String searchCateogory) {
 		String url = "http://www.saramin.co.kr/zf_user/search?search_area=main&search_done="
-				+ "y&search_optional_item=n&searchType=default_mysearch&searchword="
-				+ searchWord;
-		List<RespListDto> list = new ArrayList<>();
-		
+				+ "y&search_optional_item=n&searchType=search&searchword="
+				+ searchWord + "&cat_cd=" + searchCateogory;
+		List<RespListDto> list = new ArrayList<>();		
 		try {
 			Connection conn = Jsoup.connect(url).header("Content-Type", "text/html;charset=UTF-8").userAgent(USER_AGENT)
 					.method(Connection.Method.GET).ignoreContentType(true);
@@ -95,8 +94,7 @@ public class BoardService {
 					dto.setDeadLine(el.select("div.job_date span").text());
 					dto.setHref(el.select("a").attr("href"));
 					list.add(dto);
-			}
-			
+			}			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -13,16 +13,16 @@
 			</div>
 			<div class="col-lg-3 col-md-4">
 				<div class="single_input">
-					<select class="wide">
+					<select class="wide" id="searchCategory">
 						<option data-display="카테고리">전체</option>
-						<option value="1">웹 개발</option>
-						<option value="2">응용프로그램 개발</option>
-						<option value="3">시스템 개발</option>
-						<option value="4">서버.네트워크.보안</option>
-						<option value="5">데이터베이스.DBA</option>
-						<option value="6">하드웨어.소프트웨어</option>
-						<option value="7">ERP.시스템분석.설계</option>
-						<option value="8">통신.모바일</option>
+						<option value="404">웹 개발</option>
+						<option value="407">응용프로그램 개발</option>
+						<option value="408">시스템 개발</option>
+						<option value="402">서버.네트워크.보안</option>
+						<option value="416">데이터베이스.DBA</option>
+						<option value="411">하드웨어.소프트웨어</option>
+						<option value="409">ERP.시스템분석.설계</option>
+						<option value="410">통신.모바일</option>
 					</select>
 				</div>
 			</div>
@@ -38,6 +38,7 @@
 
 <form id="searchForm" action="/board/searchList" method="GET">
 	<input type="hidden" name="wordSubmit" id="wordSubmit" />
+	<input type="hidden" name="categorySubmit" id="categorySubmit" />
 </form>
 
 <!-- popular_catagory_area_start  -->
@@ -137,7 +138,7 @@
 		</div>
 		<div class="job_lists">
 			<div class="row">
-				<c:forEach var="board" items="${boards}">
+				<c:forEach var="board" items="${boards}" begin="${pageMaker.cri.perPageNum}" end="5">
 					<div class="col-lg-12 col-md-12">
 						<div class="single_jobs white-bg d-flex justify-content-between">
 							<div class="jobs_left d-flex align-items-center">
@@ -167,19 +168,33 @@
 							</div>
 						</div>
 					</div>
-
 				</c:forEach>
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="pagination_wrap">
-						<ul>
-							<li><a href="#"> <i class="ti-angle-left"></i>
-							</a></li>
-							<li><a href="#"><span>01</span></a></li>
-							<li><a href="#"><span>02</span></a></li>
-							<li><a href="#"> <i class="ti-angle-right"></i>
-							</a></li>
+						<ul id="paginate">
+							<c:if test="${pageMaker.prev}">
+								<li><a href="${pageMaker.startPage-1}"> <i
+										class="ti-angle-left"></i>
+								</a></li>
+							</c:if>
+							<c:forEach begin="${pageMaker.startPage}"
+								end="${pageMaker.endPage}" var="i">
+								<c:choose>
+									<c:when test="${pageMaker.cri.page==i}">
+										<li><a href="#"><span>${i}</span></a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="${i}"><span>${i}</span></a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+							<c:if test="${pageMaker.next}">
+								<li><a href="${pageMaker.endPage+1}"> <i
+										class="ti-angle-right"></i>
+								</a></li>
+							</c:if>
 						</ul>
 					</div>
 				</div>
@@ -251,16 +266,37 @@
 		</div>
 	</div>
 </div>
-
+<form id="jobForm">
+	<input type="hidden" name="page" value="${pageMaker.cri.page}">
+	<input type="hidden" name="perPageNum"
+		value="${pageMaker.cri.perPageNum}">
+</form>
 <script>
 	$('#search--submit').on('click', function() {
 
 		var searchForm = $('#searchForm');
-		var data = $('#searchWord').val();
-		$('#wordSubmit').attr('value', data);
+		var searchWord = $('#searchWord').val();
+		$('#wordSubmit').attr('value', searchWord);
+		var searchCategory = $('#searchCategory option:selected').val();
+		$('#categorySubmit').attr('value', searchCategory);
 		searchForm.submit();
 	});
 </script>
 
+<script type="text/javascript">
+
+	var jobForm = $('#jobForm');
+
+	$('#paginate a').on('click', function(event) {
+		// 원래 a 링크 클릭을 막는다
+		event.preventDefault();
+		//$(this) = 내가 이벤트 준 것
+		var targetPage = $(this).attr('href');
+		console.log(targetPage);
+		jobForm.find("[name='page']").val(targetPage);
+		jobForm.attr('action', '/').attr('method', 'get');
+		jobForm.submit();
+	});
+</script>
 <%@include file="../include/footer.jsp"%>
 <%@include file="../include/script.jsp"%>

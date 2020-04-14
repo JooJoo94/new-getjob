@@ -8,7 +8,8 @@
 		<div class="row cat_search">
 			<div class="col-lg-6 col-md-8">
 				<div class="single_input">
-					<input type="text" id="searchWord" placeholder="검색어" />
+					<input type="text" id="searchWord" placeholder="검색어"
+						onKeypress="enterKeyEvent(event)" />
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-4">
@@ -37,8 +38,8 @@
 <!--/ catagory_area -->
 
 <form id="searchForm" action="/board/searchList" method="GET">
-	<input type="hidden" name="wordSubmit" id="wordSubmit" />
-	<input type="hidden" name="categorySubmit" id="categorySubmit" />
+	<input type="hidden" name="wordSubmit" id="wordSubmit" /> <input
+		type="hidden" name="categorySubmit" id="categorySubmit" />
 </form>
 
 <!-- popular_catagory_area_start  -->
@@ -54,7 +55,8 @@
 		<div class="row">
 			<div class="col-lg-4 col-xl-3 col-md-6">
 				<div class="single_catagory">
-					<a href="board/categoryList/404"><h4>웹 개발</h4></a>
+					<input type="hidden" class="categoryNum" value="404"/>
+					<a href="javascript:void(0)"; onclick="submitCategory(this);"><h4>웹 개발</h4></a>
 					<p>
 						<span>3068</span>position
 					</p>
@@ -62,7 +64,8 @@
 			</div>
 			<div class="col-lg-4 col-xl-3 col-md-6">
 				<div class="single_catagory">
-					<a href="board/categoryList/407"><h4>응용프로그램 개발</h4></a>
+					<input type="hidden" class="categoryNum" value="407"/>
+					<a href="javascript:void(0)" onclick="submitCategory();"><h4>응용프로그램 개발</h4></a>
 					<p>
 						<span>3512</span>position
 					</p>
@@ -70,7 +73,8 @@
 			</div>
 			<div class="col-lg-4 col-xl-3 col-md-6">
 				<div class="single_catagory">
-					<a href="board/categoryList/408"><h4>시스템 개발</h4></a>
+					<input type="hidden" value="408"/>
+					<a href="javascript:void(0)"><h4>시스템 개발</h4></a>
 					<p>
 						<span>496</span>position
 					</p>
@@ -78,7 +82,8 @@
 			</div>
 			<div class="col-lg-4 col-xl-3 col-md-6">
 				<div class="single_catagory">
-					<a href="board/categoryList/402"><h4>서버.네트워크.보안</h4></a>
+					<input type="hidden" class="categoryNum" value="402"/>
+					<a href="javascript:void(0)"><h4>서버.네트워크.보안</h4></a>
 					<p>
 						<span>2144</span>position
 					</p>
@@ -86,7 +91,8 @@
 			</div>
 			<div class="col-lg-4 col-xl-3 col-md-6">
 				<div class="single_catagory">
-					<a href="board/categoryList/416"><h4>데이터베이스.DBA</h4></a>
+					<input type="hidden" class="categoryNum" value="416"/>
+					<a href="javascript:void(0)"><h4>데이터베이스.DBA</h4></a>
 					<p>
 						<span>685</span>position
 					</p>
@@ -94,7 +100,8 @@
 			</div>
 			<div class="col-lg-4 col-xl-3 col-md-6">
 				<div class="single_catagory">
-					<a href="board/categoryList/409"><h4>ERP.시스템분석.설계</h4></a>
+					<input type="hidden" class="categoryNum" value="411"/>
+					<a href="javascript:void(0)"><h4>ERP.시스템분석.설계</h4></a>
 					<p>
 						<span>2115</span> position
 					</p>
@@ -102,7 +109,8 @@
 			</div>
 			<div class="col-lg-4 col-xl-3 col-md-6">
 				<div class="single_catagory">
-					<a href="board/categoryList/411"><h4>하드웨어.소프트웨어</h4></a>
+					<input type="hidden" class="categoryNum" value="409"/>
+					<a href="javascript:void(0)"><h4>하드웨어.소프트웨어</h4></a>
 					<p>
 						<span>568</span>position
 					</p>
@@ -110,7 +118,8 @@
 			</div>
 			<div class="col-lg-4 col-xl-3 col-md-6">
 				<div class="single_catagory">
-					<a href="board/categoryList/410"><h4>통신.모바일</h4></a>
+					<input type="hidden" class="categoryNum" value="410"/>
+					<a href="javascript:void(0)"><h4>통신.모바일</h4></a>
 					<p>
 						<span>616</span> position
 					</p>
@@ -119,6 +128,13 @@
 		</div>
 	</div>
 </div>
+
+
+<form id="categoryForm" action="/board/categoryList" method="GET">
+	<input type="hidden" name="categoryNum" id="categoryNum" /> <input
+		type="hidden" name="pageNum" id="pageNum" />
+</form>
+
 <!-- popular_catagory_area_end  -->
 
 <!-- job_listing_area_start  -->
@@ -138,7 +154,8 @@
 		</div>
 		<div class="job_lists">
 			<div class="row">
-				<c:forEach var="board" items="${boards}" begin="${pageMaker.cri.perPageNum}" end="5">
+				<div id="num"></div>
+				<c:forEach var="board" items="${boards}">
 					<div class="col-lg-12 col-md-12">
 						<div class="single_jobs white-bg d-flex justify-content-between">
 							<div class="jobs_left d-flex align-items-center">
@@ -154,7 +171,6 @@
 												<i class="fas fa-building"></i>${board.companyName}
 											</p>
 										</div>
-
 									</div>
 								</div>
 							</div>
@@ -183,10 +199,11 @@
 								end="${pageMaker.endPage}" var="i">
 								<c:choose>
 									<c:when test="${pageMaker.cri.page==i}">
-										<li><a href="#"><span>${i}</span></a></li>
+										<li><a href="javascript:void(0)"><span id="page${i}"
+												class="pageNum">${i}</span></a></li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="${i}"><span>${i}</span></a></li>
+										<li><a href="/board/page/${i}"><span class="pageNum">${i}</span></a></li>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -266,11 +283,7 @@
 		</div>
 	</div>
 </div>
-<form id="jobForm">
-	<input type="hidden" name="page" value="${pageMaker.cri.page}">
-	<input type="hidden" name="perPageNum"
-		value="${pageMaker.cri.perPageNum}">
-</form>
+
 <script>
 	$('#search--submit').on('click', function() {
 
@@ -281,22 +294,32 @@
 		$('#categorySubmit').attr('value', searchCategory);
 		searchForm.submit();
 	});
-</script>
 
-<script type="text/javascript">
+	function enterKeyEvent(e) {
+		if (e.keyCode == 13) {
+			var searchForm = $('#searchForm');
+			var searchWord = $('#searchWord').val();
+			$('#wordSubmit').attr('value', searchWord);
+			var searchCategory = $('#searchCategory option:selected').val();
+			searchForm.submit();
+		} else {
+			e.keyCode == 0;
+			return;
+		}
+	}
 
-	var jobForm = $('#jobForm');
+	function submitCategory(){
+		var categoryForm = $('#categoryForm');
+		var categoryNum = $('.categoryNum').val();
+		$('#categoryNum').attr('value', categoryNum);
+		$('#pageNum').attr('value', 1);
+		categoryForm.submit();
+		};
 
-	$('#paginate a').on('click', function(event) {
-		// 원래 a 링크 클릭을 막는다
-		event.preventDefault();
-		//$(this) = 내가 이벤트 준 것
-		var targetPage = $(this).attr('href');
-		console.log(targetPage);
-		jobForm.find("[name='page']").val(targetPage);
-		jobForm.attr('action', '/').attr('method', 'get');
-		jobForm.submit();
+	$('.pageNum').on('click', function() {
+		$(this).css('border-color', '#00D363').css('border-width', '2px');
 	});
 </script>
+
 <%@include file="../include/footer.jsp"%>
 <%@include file="../include/script.jsp"%>

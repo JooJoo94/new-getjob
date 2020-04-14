@@ -21,7 +21,7 @@ public class Criteria {
 			return;
 		}
 		this.page = page;
-	}
+	}	
 
 	public void setPerPageNum(int perPageNum) {
 		if (perPageNum <= 0 || perPageNum > 100) {

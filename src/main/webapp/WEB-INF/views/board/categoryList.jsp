@@ -134,6 +134,7 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="pagination_wrap">
+							<input type="hidden" name="currentPage" id="currentPage" value="${pageMaker.cri.page}"/>
 								<ul id="paginate">
 									<c:if test="${pageMaker.prev}">
 										<li><a href="${pageMaker.startPage-1}"> <i
@@ -144,10 +145,10 @@
 										end="${pageMaker.endPage}" var="i">
 										<c:choose>
 											<c:when test="${pageMaker.cri.page==i}">
-												<li><a href="#"><span>${i}</span></a></li>
+												<li><a href="javascript:void(0)"><span>${i}</span></a></li>
 											</c:when>
 											<c:otherwise>
-												<li><a href="${i}"><span>${i}</span></a></li>
+												<li id="page${i}"><a href="javascript:void(0)" onclick="submitCategory(this);" class="page"><span>${i}</span></a></li>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
@@ -157,23 +158,24 @@
 									</c:if>
 								</ul>
 							</div>
-						</div>
+						</div> 
 					</div>
+<form id="categoryForm" action="/board/categoryListPaging" method="GET">
+	<input type="hidden" name="categoryNum" id="categoryNum" value="${categoryNum}"/> <input
+		type="hidden" name="pageNum" id="pageNum" />
+</form>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-<form id="jobForm">
-	<input type="hidden" name="page" value="${pageMaker.cri.page}">
-	<input type="hidden" name="perPageNum"
-		value="${pageMaker.cri.perPageNum}">
-</form>
-
 <script>
 	var jobForm = $('#jobForm');
-
+	var page = $('.page').text();
+	var currentPage = $('#currentPage').val();
+	var num = $("li[id ='page'+currentPage]");
+	
 	$('#pagenate a').on('click', function(event) {
 		// 원래 a 링크 클릭을 막는다
 		event.preventDefault();
@@ -183,6 +185,17 @@
 		jobForm.attr('action', '/list').attr('method', 'get');
 		jobForm.submit();
 	});
+
+	function submitCategory(e){
+		$('.page').css('border-color', '#eaeaea');
+		$(e).css('border-color', '#00D363').css('border-width', '2px');
+		$('.page').toggleClass(".active-color");
+		
+		var categoryForm = $('#categoryForm');
+		var pageNum = $(e).text();
+		$('#pageNum').attr('value', pageNum);
+		categoryForm.submit();
+		};
 
 </script>
 

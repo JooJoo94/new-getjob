@@ -11,7 +11,9 @@
 					<div class="recent_joblist white-bg ">
 						<div class="row align-items-center">
 							<div class="col-md-6">
-								<h4>&nbsp;<strong>채용정보</strong></h4>
+								<h4>
+									&nbsp;<strong>채용정보</strong>
+								</h4>
 							</div>
 							<div class="col-md-6">
 								<div class="serch_cat d-flex justify-content-end">
@@ -33,7 +35,7 @@
 								<div class="single_jobs white-bg d-flex justify-content-between">
 									<div class="jobs_left d-flex align-items-center">
 										<div class="jobs_conetent ml-2">
-											<a href="http://www.saramin.co.kr${job.href}"><h4 style="Roboto;">${job.title}</h4></a>
+											<a href="http://www.saramin.co.kr${job.href}"><h4>${job.title}</h4></a>
 											<div class="links_locat d-flex align-items-center">
 												<div class="location">
 													<p>
@@ -45,7 +47,8 @@
 									</div>
 									<div class="jobs_right">
 										<div class="apply_now">
-											</a> <a href="http://www.saramin.co.kr${job.href}" class="boxed-btn3">Apply Now</a>
+											</a> <a href="http://www.saramin.co.kr${job.href}"
+												class="boxed-btn3">지원하기</a>
 										</div>
 										<div class="date">
 											<p>${job.deadLine}</p>
@@ -58,22 +61,67 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="pagination_wrap">
-								<ul>
-									<li><a href="#"> <i class="ti-angle-left"></i>
-									</a></li>
-									<li><a href="#"><span>01</span></a></li>
-									<li><a href="#"><span>02</span></a></li>
-									<li><a href="#"> <i class="ti-angle-right"></i>
-									</a></li>
+								<ul id="paginate">
+									<c:if test="${pageMaker.prev}">
+										<li><a
+											href="board/searchList?searchCategory=${searchCategory}&searchWord=${searchWord}&searchPage=${pageMaker.startPage-1}"
+											onclick="next(this);"> <i class="ti-angle-left"></i>
+										</a></li>
+									</c:if>
+									<c:forEach begin="${pageMaker.startPage}"
+										end="${pageMaker.endPage}" var="i">
+										<c:choose>
+											<c:when test="${pageMaker.cri.page==i}">
+												<li><a href="javascript:void(0)" id="page"><span>${i}</span></a></li>
+											</c:when>
+											<c:otherwise>
+												<li><a href="javascript:void(0)"
+													onclick="submitCategory(this);"><span>${i}</span></a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+									<c:if test="${pageMaker.next}">
+										<li><a
+											href="/board/searchList?searchCategory=${searchCategory}&searchWord=${searchWord}&searchPage=${pageMaker.endPage+1}"
+											onclick="next(this);"> <i class="ti-angle-right"></i>
+										</a></li>
+									</c:if>
 								</ul>
 							</div>
 						</div>
 					</div>
+					<form id="searchForm" action="/board/searchList" method="GET">
+						<input type="hidden" name="searchCategory" id="searchCategory"
+							value="${searchCategory}" /> <input type="hidden"
+							name="searchWord" id="searchWord" value="${searchWord}" /> <input
+							type="hidden" name="searchPage" id="searchPage" />
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<script>
+	$('#page').css('border-color', '#00D363').css('border-width', '2px');
+
+	function submitCategory(e) {
+
+		var searchForm = $('#searchForm');
+		var searchPage = $(e).text();
+		$('#searchPage').attr('value', searchPage);
+		searchForm.submit();
+	};
+
+	function prev(e) {
+		var startPage = '${pageMaker.startPage}'
+		$('#searchPage').attr('value', startPage - 1);
+	}
+
+	function next(e) {
+		var endPage = '${pageMaker.endPage}'
+		$('#searchPage').attr('value', endPage + 1);
+	}
+</script>
 <!-- job_listing_area_end  -->
 <%@include file="../include/footer.jsp"%>
 <%@include file="../include/script.jsp"%>

@@ -24,7 +24,7 @@ public class PageMaker {
 	private void calcData() {
 		endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
 		startPage = (endPage - displayPageNum) + 1;
-		int tendPage = (int) (Math.ceil(totalCount) / (double) cri.getPerPageNum());
+		int tendPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
 
 		if (endPage > tendPage)
 			endPage = tendPage;

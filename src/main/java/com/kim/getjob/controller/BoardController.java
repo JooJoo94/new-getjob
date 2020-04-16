@@ -68,34 +68,21 @@ public class BoardController {
 			@RequestParam("pageNum") int pageNum, Model model) {
 		List<RespListDto> categoryList = boardService.카테고리별목록보기(categoryNum);
 		List<RespListDto> subCategoryList = new ArrayList<RespListDto>();
-
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(boardService.카테고리별목록보기(categoryNum).size());
-		int start = pageMaker.getCri().getPageStart();
-		for (int i = start; i < start + 5; i++) {
-			subCategoryList.add(categoryList.get(i));
-		}
-		model.addAttribute("categoryNum", categoryNum);
-		model.addAttribute("jobs", subCategoryList);
-		model.addAttribute("pageMaker", pageMaker);
-		return "/board/categoryList";
-	}
-
-	// 카테고리 페이지 Paging
-	@GetMapping("/board/categoryListPaging")
-	public String categoryListPaging(@ModelAttribute Criteria cri, @RequestParam("categoryNum") int categoryNum,
-			@RequestParam("pageNum") int pageNum, Model model) {
-		List<RespListDto> categoryList = boardService.카테고리별목록보기(categoryNum);
-		List<RespListDto> subCategoryList = new ArrayList<RespListDto>();
-
-		PageMaker pageMaker = new PageMaker();
 		cri.setPage(pageNum);
+		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(boardService.카테고리별목록보기(categoryNum).size());
 		int start = pageMaker.getCri().getPageStart();
-		for (int i = start; i < start + 5; i++) {
-			subCategoryList.add(categoryList.get(i));
+		int totalCount = boardService.카테고리별목록보기(categoryNum).size();
+
+		if (start + 4 < totalCount) {
+			for (int i = start; i <= start + 4; i++) {
+				subCategoryList.add(categoryList.get(i));
+			}
+		} else {
+			for (int i = start; i < totalCount; i++) {
+				subCategoryList.add(categoryList.get(i));
+			}
 		}
 		model.addAttribute("categoryNum", categoryNum);
 		model.addAttribute("jobs", subCategoryList);
@@ -104,9 +91,36 @@ public class BoardController {
 	}
 
 	@GetMapping("/board/searchList")
-	public String searchList(@RequestParam("wordSubmit") String searchWord,
-			@RequestParam("categorySubmit") String searchCategory, Model model) {
-		model.addAttribute("jobs", boardService.검색어목록보기(searchWord, searchCategory));
+	public String searchList(@ModelAttribute Criteria cri, 
+			@RequestParam("searchCategory") String searchCategory,
+			@RequestParam("searchWord") String searchWord,
+			@RequestParam("searchPage") int searchPage, Model model) {
+		if(searchCategory.equals("0")) {
+			searchCategory=null;
+		}
+		List<RespListDto> searchList = boardService.검색어목록보기(searchWord, searchCategory);
+		List<RespListDto> subSearchList = new ArrayList<RespListDto>();
+		
+		cri.setPage(searchPage);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(boardService.검색어목록보기(searchWord, searchCategory).size());
+		int start = pageMaker.getCri().getPageStart();
+		int totalCount = boardService.검색어목록보기(searchWord, searchCategory).size();
+		
+		if (start + 4 < totalCount) {
+			for (int i = start; i <= start + 4; i++) {
+				subSearchList.add(searchList.get(i));
+			}
+		} else {
+			for (int i = start; i < totalCount; i++) {
+				subSearchList.add(searchList.get(i));
+			}
+		}
+		model.addAttribute("searchCategory", searchCategory);
+		model.addAttribute("searchWord", searchWord);
+		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("jobs", subSearchList);
 		return "/board/searchList";
 	}
 

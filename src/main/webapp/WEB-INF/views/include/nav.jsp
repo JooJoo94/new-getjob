@@ -57,17 +57,17 @@
 											<li><a href="/">홈</a></li>
 											<li><a href="/">직무별 <i class="ti-angle-down"></i></a>
 												<ul class="submenu navUl" style="display: inline-block;">
-													<li id="navLi"><a href="board/categoryList/404">웹
+													<li id="navLi"><a href="/board/categoryList?categoryNum=404&pageNum=1">웹
 															개발 </a></li>
-													<li id="navLi"><a href="board/categoryList/407">응용프로그램
+													<li id="navLi"><a href="/board/categoryList?categoryNum=407&pageNum=1">응용프로그램
 															개발 </a></li>
-													<li id="navLi"><a href="board/categoryList/408">시스템
+													<li id="navLi"><a href="/board/categoryList?categoryNum=408&pageNum=1">시스템
 															개발 </a></li>
-													<li id="navLi"><a href="board/categoryList/402">서버.네트워크.보안</a></li>
-													<li id="navLi"><a href="board/categoryList/416">데이터베이스.DBA</a></li>
-													<li id="navLi"><a href="board/categoryList/411">하드웨어.소프트웨어</a></li>
-													<li id="navLi"><a href="board/categoryList/409">ERP.시스템분석.설계</a></li>
-													<li id="navLi"><a href="board/categoryList/410">통신.모바일</a></li>
+													<li id="navLi"><a href="/board/categoryList?categoryNum=402&pageNum=1">서버.네트워크.보안</a></li>
+													<li id="navLi"><a href="/board/categoryList?categoryNum=416&pageNum=1">데이터베이스.DBA</a></li>
+													<li id="navLi"><a href="/board/categoryList?categoryNum=411&pageNum=1">하드웨어.소프트웨어</a></li>
+													<li id="navLi"><a href="/board/categoryList?categoryNum=409&pageNum=1">ERP.시스템분석.설계</a></li>
+													<li id="navLi"><a href="/board/categoryList?categoryNum=410&pageNum=1">통신.모바일</a></li>
 												</ul></li>
 											<c:choose>
 												<c:when test="${not empty sessionScope.principal}">
@@ -96,7 +96,7 @@
 													src="/media/${sessionScope.principal.profile}"
 													width="30px" height="30px" style="border: 2px solid #00d363"
 													onerror="javascript:this.src = '/images/unknown.jpg'" /> 
-													<a>${sessionScope.principal.userName}
+													<a href="/user/profile/${sessionScope.principal.id}">${sessionScope.principal.userName}
 													<strong>님</strong>
 												</a>
 											</div>

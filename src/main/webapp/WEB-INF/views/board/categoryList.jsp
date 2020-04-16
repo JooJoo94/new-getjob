@@ -19,58 +19,65 @@
 								</div>
 								<div class="col-lg-12 p-2">
 									<div class="job_btn">
-										<a id="searchCategory" href="404" class="categoryBtn btn-lg">웹
-											개발</a>
+										<a id="searchCategory"
+											href="/board/categoryList?categoryNum=404&pageNum=1"
+											class="categoryBtn btn-lg">웹 개발</a>
 									</div>
 								</div>
 								<div class="col-lg-12 p-2">
 									<div class="job_btn">
-										<a id="searchCategory" href="407" class="categoryBtn btn-lg">응용프로그램
-											개발</a>
+										<a id="searchCategory"
+											href="/board/categoryList?categoryNum=407&pageNum=1"
+											class="categoryBtn btn-lg">응용프로그램 개발</a>
 									</div>
 								</div>
 								<div class="col-lg-12 p-2">
 									<div class="job_btn">
-										<a id="searchCategory" href="408" class="categoryBtn btn-lg">시스템
-											개발</a>
+										<a id="searchCategory"
+											href="/board/categoryList?categoryNum=408&pageNum=1"
+											class="categoryBtn btn-lg">시스템 개발</a>
 									</div>
 								</div>
 								<div class="col-lg-12 p-2">
 									<div class="job_btn">
-										<a id="searchCategory" href="402" class="categoryBtn btn-lg">서버.네트워크.보안</a>
+										<a id="searchCategory"
+											href="/board/categoryList?categoryNum=402&pageNum=1"
+											class="categoryBtn btn-lg">서버.네트워크.보안</a>
 									</div>
 								</div>
 								<div class="col-lg-12 p-2">
 									<div class="job_btn">
-										<a id="searchCategory" href="416" class="categoryBtn btn-lg">데이터베이스.DBA</a>
+										<a id="searchCategory"
+											href="/board/categoryList?categoryNum=416&pageNum=1"
+											class="categoryBtn btn-lg">데이터베이스.DBA</a>
 									</div>
 								</div>
 								<div class="col-lg-12 p-2">
 									<div class="job_btn">
-										<a id="searchCategory" href="411" class="categoryBtn btn-lg">하드웨어.소프트웨어</a>
+										<a id="searchCategory"
+											href="/board/categoryList?categoryNum=411&pageNum=1"
+											class="categoryBtn btn-lg">하드웨어.소프트웨어</a>
 									</div>
 								</div>
 								<div class="col-lg-12 p-2">
 									<div class="job_btn">
-										<a id="searchCategory" href="409" class="categoryBtn btn-lg">ERP.시스템분석.설계</a>
+										<a id="searchCategory"
+											href="/board/categoryList?categoryNum=409&pageNum=1"
+											class="categoryBtn btn-lg">ERP.시스템분석.설계</a>
 									</div>
 								</div>
 								<div class="col-lg-12 p-2">
 									<div class="job_btn">
-										<a id="searchCategory" href="410" class="categoryBtn btn-lg">통신.모바일</a>
+										<a id="searchCategory"
+											href="/board/categoryList?categoryNum=410&pageNum=1"
+											class="categoryBtn btn-lg">통신.모바일</a>
 									</div>
 								</div>
 							</div>
 						</form>
 					</div>
-					<div class="range_wrap">
-						<label for="amount">Price range:</label>
-						<div id="slider-range"></div>
-						<p>
-							<input type="text" id="amount" readonly
-								style="border: 0; color: #7A838B; font-size: 14px; font-weight: 400;">
-						</p>
-					</div>
+					<br />
+					<br />
 					<div class="reset_btn">
 						<button class="boxed-btn3 w-100" type="submit">Reset</button>
 					</div>
@@ -134,36 +141,45 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="pagination_wrap">
-							<input type="hidden" name="currentPage" id="currentPage" value="${pageMaker.cri.page}"/>
+								<input type="hidden" name="currentPage" id="currentPage"
+									value="${pageMaker.cri.page}" />
 								<ul id="paginate">
 									<c:if test="${pageMaker.prev}">
-										<li><a href="${pageMaker.startPage-1}"> <i
-												class="ti-angle-left"></i>
+										<li><a
+											href="/board/categoryList?categoryNum=${categoryNum}&pageNum=${pageMaker.startPage-1}"
+											onclick="prev(this);" id="prev"> <i class="ti-angle-left"></i>
 										</a></li>
 									</c:if>
 									<c:forEach begin="${pageMaker.startPage}"
 										end="${pageMaker.endPage}" var="i">
 										<c:choose>
 											<c:when test="${pageMaker.cri.page==i}">
-												<li><a href="javascript:void(0)"><span>${i}</span></a></li>
+												<li><a href="javascript:void(0)" id="page"><span>${i}</span></a></li>
 											</c:when>
 											<c:otherwise>
-												<li id="page${i}"><a href="javascript:void(0)" onclick="submitCategory(this);" class="page"><span>${i}</span></a></li>
+												<li><a href="javascript:void(0)"
+													onclick="submitCategory(this);"><span>${i}</span></a></li>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
 									<c:if test="${pageMaker.next}">
-										<li><a href="${pageMaker.endPage+1}"> <i class="ti-angle-right"></i>
+										<li><a
+											href="/board/categoryList?categoryNum=${categoryNum}&pageNum=${pageMaker.endPage+1}"
+											onclick="next(this);" id="next"> <i
+												class="ti-angle-right"></i>
 										</a></li>
 									</c:if>
 								</ul>
 							</div>
-						</div> 
+						</div>
 					</div>
-<form id="categoryForm" action="/board/categoryListPaging" method="GET">
-	<input type="hidden" name="categoryNum" id="categoryNum" value="${categoryNum}"/> <input
-		type="hidden" name="pageNum" id="pageNum" />
-</form>
+					<form id="categoryForm" action="/board/categoryList" method="GET">
+						<input type="hidden" name="categoryNum" id="categoryNum"
+							value="${categoryNum}" /> <input type="hidden" name="pageNum"
+							id="pageNum" />
+
+
+					</form>
 				</div>
 			</div>
 		</div>
@@ -171,32 +187,27 @@
 </div>
 
 <script>
-	var jobForm = $('#jobForm');
-	var page = $('.page').text();
-	var currentPage = $('#currentPage').val();
-	var num = $("li[id ='page'+currentPage]");
-	
-	$('#pagenate a').on('click', function(event) {
-		// 원래 a 링크 클릭을 막는다
-		event.preventDefault();
-		//$(this) = 내가 이벤트 준 것
-		var targetPage = $(this).attr('href');
-		jobForm.find("[name='page']").val(targetPage);
-		jobForm.attr('action', '/list').attr('method', 'get');
-		jobForm.submit();
-	});
 
-	function submitCategory(e){
-		$('.page').css('border-color', '#eaeaea');
-		$(e).css('border-color', '#00D363').css('border-width', '2px');
-		$('.page').toggleClass(".active-color");
-		
+	// 현재 페이지 표시
+	$('#page').css('border-color', '#00D363').css('border-width', '2px');
+
+	function submitCategory(e) {
+
 		var categoryForm = $('#categoryForm');
 		var pageNum = $(e).text();
 		$('#pageNum').attr('value', pageNum);
 		categoryForm.submit();
-		};
+	};
 
+	function prev(e) {
+		var startPage = '${pageMaker.startPage}';
+		$('#pageNum').attr('value', startPage - 1);
+	}
+
+	function next(e) {
+		var endPage = '${pageMaker.endPage}';
+		$('#pageNum').attr('value', endPage + 1);
+	}
 </script>
 
 <!-- job_listing_area_end  -->

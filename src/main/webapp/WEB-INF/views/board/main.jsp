@@ -8,14 +8,14 @@
 		<div class="row cat_search">
 			<div class="col-lg-6 col-md-8">
 				<div class="single_input">
-					<input type="text" id="searchWord" placeholder="검색어"
+					<input type="text" id="searchBar" placeholder="검색어"
 						onKeypress="enterKeyEvent(event)" />
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-4">
 				<div class="single_input">
-					<select class="wide" id="searchCategory">
-						<option data-display="카테고리">전체</option>
+					<select class="wide" id="categoryBar">
+						<option data-display="카테고리" value="0">전체</option>
 						<option value="404">웹 개발</option>
 						<option value="407">응용프로그램 개발</option>
 						<option value="408">시스템 개발</option>
@@ -38,8 +38,9 @@
 <!--/ catagory_area -->
 
 <form id="searchForm" action="/board/searchList" method="GET">
-	<input type="hidden" name="wordSubmit" id="wordSubmit" /> <input
-		type="hidden" name="categorySubmit" id="categorySubmit" />
+	<input type="hidden" name="searchCategory" id="searchCategory"/> 
+	<input type="hidden" name="searchWord" id="searchWord" />
+	<input type="hidden" name="searchPage" id="searchPage"/>
 </form>
 
 <!-- popular_catagory_area_start  -->
@@ -55,8 +56,8 @@
 		<div class="row">
 			<div class="col-lg-4 col-xl-3 col-md-6">
 				<div class="single_catagory">
-					<input type="hidden" class="categoryNum" value="404"/>
-					<a href="javascript:void(0)"; onclick="submitCategory(this);"><h4>웹 개발</h4></a>
+					<a href="javascript:void(0)"; onclick="submitCategory(404);">
+					<h4>웹 개발</h4></a>
 					<p>
 						<span>3068</span>position
 					</p>
@@ -64,8 +65,7 @@
 			</div>
 			<div class="col-lg-4 col-xl-3 col-md-6">
 				<div class="single_catagory">
-					<input type="hidden" class="categoryNum" value="407"/>
-					<a href="javascript:void(0)" onclick="submitCategory();"><h4>응용프로그램 개발</h4></a>
+					<a href="javascript:void(0)" onclick="submitCategory(407);"><h4>응용프로그램 개발</h4></a>
 					<p>
 						<span>3512</span>position
 					</p>
@@ -73,8 +73,7 @@
 			</div>
 			<div class="col-lg-4 col-xl-3 col-md-6">
 				<div class="single_catagory">
-					<input type="hidden" value="408"/>
-					<a href="javascript:void(0)"><h4>시스템 개발</h4></a>
+					<a href="javascript:void(0)" onclick="submitCategory(408);"><h4>시스템 개발</h4></a>
 					<p>
 						<span>496</span>position
 					</p>
@@ -82,8 +81,7 @@
 			</div>
 			<div class="col-lg-4 col-xl-3 col-md-6">
 				<div class="single_catagory">
-					<input type="hidden" class="categoryNum" value="402"/>
-					<a href="javascript:void(0)"><h4>서버.네트워크.보안</h4></a>
+					<a href="javascript:void(0)" onclick="submitCategory(402);"><h4>서버.네트워크.보안</h4></a>
 					<p>
 						<span>2144</span>position
 					</p>
@@ -91,8 +89,7 @@
 			</div>
 			<div class="col-lg-4 col-xl-3 col-md-6">
 				<div class="single_catagory">
-					<input type="hidden" class="categoryNum" value="416"/>
-					<a href="javascript:void(0)"><h4>데이터베이스.DBA</h4></a>
+					<a href="javascript:void(0)" onclick="submitCategory(416);"><h4>데이터베이스.DBA</h4></a>
 					<p>
 						<span>685</span>position
 					</p>
@@ -100,8 +97,7 @@
 			</div>
 			<div class="col-lg-4 col-xl-3 col-md-6">
 				<div class="single_catagory">
-					<input type="hidden" class="categoryNum" value="411"/>
-					<a href="javascript:void(0)"><h4>ERP.시스템분석.설계</h4></a>
+					<a href="javascript:void(0)" onclick="submitCategory(411);"><h4>ERP.시스템분석.설계</h4></a>
 					<p>
 						<span>2115</span> position
 					</p>
@@ -109,8 +105,7 @@
 			</div>
 			<div class="col-lg-4 col-xl-3 col-md-6">
 				<div class="single_catagory">
-					<input type="hidden" class="categoryNum" value="409"/>
-					<a href="javascript:void(0)"><h4>하드웨어.소프트웨어</h4></a>
+					<a href="javascript:void(0)" onclick="submitCategory(409);"><h4>하드웨어.소프트웨어</h4></a>
 					<p>
 						<span>568</span>position
 					</p>
@@ -118,8 +113,7 @@
 			</div>
 			<div class="col-lg-4 col-xl-3 col-md-6">
 				<div class="single_catagory">
-					<input type="hidden" class="categoryNum" value="410"/>
-					<a href="javascript:void(0)"><h4>통신.모바일</h4></a>
+					<a href="javascript:void(0)" onclick="submitCategory(410);"><h4>통신.모바일</h4></a>
 					<p>
 						<span>616</span> position
 					</p>
@@ -199,7 +193,7 @@
 								end="${pageMaker.endPage}" var="i">
 								<c:choose>
 									<c:when test="${pageMaker.cri.page==i}">
-										<li><a href="javascript:void(0)"><span id="page${i}"
+										<li><a href="javascript:void(0)" id="page"><span
 												class="pageNum">${i}</span></a></li>
 									</c:when>
 									<c:otherwise>
@@ -285,22 +279,29 @@
 </div>
 
 <script>
-	$('#search--submit').on('click', function() {
 
+	// 검색 Form
+	
+	$('#search--submit').on('click', function() {
+		
 		var searchForm = $('#searchForm');
-		var searchWord = $('#searchWord').val();
-		$('#wordSubmit').attr('value', searchWord);
-		var searchCategory = $('#searchCategory option:selected').val();
-		$('#categorySubmit').attr('value', searchCategory);
+		var searchCategory = $('#categoryBar option:selected').val();
+		$('#searchCategory').attr('value', searchCategory);
+		var searchWord = $('#searchBar').val();
+		$('#searchWord').attr('value', searchWord);	
+		$('#searchPage').attr('value', 1);
 		searchForm.submit();
 	});
 
+	// 엔터키 눌렀을 때 검색
 	function enterKeyEvent(e) {
 		if (e.keyCode == 13) {
 			var searchForm = $('#searchForm');
-			var searchWord = $('#searchWord').val();
-			$('#wordSubmit').attr('value', searchWord);
-			var searchCategory = $('#searchCategory option:selected').val();
+			var searchCategory = $('#categoryBar option:selected').val();
+			$('#searchCategory').attr('value', searchCategory);
+			var searchWord = $('#searchBar').val();
+			$('#searchWord').attr('value', searchWord);	
+			$('#searchPage').attr('value', 1);
 			searchForm.submit();
 		} else {
 			e.keyCode == 0;
@@ -308,14 +309,17 @@
 		}
 	}
 
-	function submitCategory(){
+	// 카테고리 Form
+	function submitCategory(event){
 		var categoryForm = $('#categoryForm');
-		var categoryNum = $('.categoryNum').val();
+		var categoryNum = event;
 		$('#categoryNum').attr('value', categoryNum);
 		$('#pageNum').attr('value', 1);
 		categoryForm.submit();
 		};
-
+		
+	// 페이징
+	$('#page').css('border-color', '#00D363').css('border-width', '2px');
 	$('.pageNum').on('click', function() {
 		$(this).css('border-color', '#00D363').css('border-width', '2px');
 	});

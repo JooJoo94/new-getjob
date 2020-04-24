@@ -25,8 +25,7 @@ $("#joinForm").validate({
 				email : true
 			},
 			phone : {
-				required : true,
-				number: true
+				required : true
 			}
 
 		},
@@ -54,7 +53,6 @@ $("#joinForm").validate({
 			},
 			phone : {
 				required : "휴대전화 번호를 입력하세요",
-				number: "휴대전화 번호를 정확히 입력하세요"
 			}
 		}
 	});

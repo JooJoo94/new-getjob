@@ -6,11 +6,11 @@
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
-<title>Job Board</title>
+<title>GetJob</title>
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <!-- <link rel="manifest" href="site.webmanifest"> -->
-<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png" />
+<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
 <!-- Place favicon.ico in the root directory -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -71,11 +71,12 @@
 												</ul></li>
 											<c:choose>
 												<c:when test="${not empty sessionScope.principal}">
-													<li><a href="/resume/list">나의 이력서 <i
+													<li><a href="/resume/list">마이페이지 <i
 															class="ti-angle-down"></i></a>
 														<ul class="submenu myResume">
 															<li><a href="/resume/write">이력서 작성</a></li>
 															<li><a href="/resume/list">이력서 목록</a></li>
+															<li><a href="/resume/essay">자기소개서</a></li>
 															<li><a
 																href="/user/profile/${sessionScope.principal.id}">회원정보
 																	수정</a></li>

@@ -33,8 +33,13 @@ public class ResumeController {
 
 		return "/resume/write";
 	}
+	@GetMapping("/resume/essay")
+	public String essay() {		
+
+		return "/resume/essay";
+	}
 	
-	@GetMapping("/resume/resumePreview/{id}")
+	@GetMapping("/resume/preview/{id}")
 	public String resumeCheck(@PathVariable int id, Model model) {
 		
 		model.addAttribute("basic", resumeService.basic이력서(id));

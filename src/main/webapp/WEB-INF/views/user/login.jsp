@@ -9,7 +9,7 @@
 				<h2 id="title">로그인</h2>
 			</div>
 			<div class="col-lg-8 col-md-6 col-sm-8 ">
-				<form>
+				<form id="loginForm" class="loginForm">
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="form-group">
@@ -20,7 +20,7 @@
 						<br />
 						<div class="col-sm-12">
 							<div class="form-group">
-								<label for="password">비밀번호</label> <input class="form-control"
+								<label for="password">비밀번호</label> <input class="form-control" name="password"
 									id="password" type="password" placeholder="비밀번호를 입력하세요" />
 							</div>
 						</div>
@@ -37,6 +37,30 @@
 </section>
 
 <%@include file="../include/script.jsp"%>
+<script type="text/javascript">
+/**
+ * 회원가입 유효성 체크
+ */
+$("#loginForm").validate({
+		rules : {
+			userId : {
+				required : true
+			},
+			password : {
+				required : true,
+
+			}
+		},
+		messages : {
+			userId : {
+				required : "아이디를 입력하세요",
+			},
+			password : {
+				required : "비밀번호를 입력하세요",
+			}
+		}
+	});
+</script>
 <script>
 	$('#login--submit').on('click', function() {
 		var data = {

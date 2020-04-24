@@ -12,7 +12,7 @@
 				<div class="apply_job_form white-bg">
 					<h4>기본정보</h4>
 					<form id="form1" class="multiForm">
-						<input class="col-md-12 job_form_title" type="text" name = "title"
+						<input class="col-md-12 job_form_title" type="text" name="title"
 							placeholder="이력서 제목" />
 						<div class="row">
 							<div class="col-md-12">
@@ -35,7 +35,7 @@
 							</div>
 							<div class="col-md-12">
 								<div class="input_field">
-									<label class="col-md-2">전화번호</label> <input class="col-md-9"
+									<label class="col-md-2">전화번호</label> <input class="col-md-9 phoneNumber" 
 										id="phone" name="phone" type="text" placeholder="전화번호 입력" />
 								</div>
 							</div>
@@ -113,10 +113,8 @@
 										class="btn dropdown-toggle col-md-9 p-3 mb-4"
 										data-toggle="dropdown">전공계열 선택</button>
 									<div class="dropdown-menu col-md-9">
-										<a class="dropdown-item">대학(2,3년)</a> 
-										<a class="dropdown-item">대학교(4년)</a> 
-										<a class="dropdown-item">대학원(석사)</a>
-										<a class="dropdown-item">대학원(박사)</a>
+										<a class="dropdown-item">대학(2,3년)</a> <a class="dropdown-item">대학교(4년)</a>
+										<a class="dropdown-item">대학원(석사)</a> <a class="dropdown-item">대학원(박사)</a>
 									</div>
 
 								</div>
@@ -195,6 +193,7 @@
 			$('#universityImformation').hide();
 		} else if ($(this).attr('for') == 'university') {
 			$('.level-education').removeAttr('name');
+			$("span").html("고등");
 			$('#university').attr('name', 'level');
 			$('#universityImformation').show();
 		}
@@ -258,6 +257,13 @@
 		$('.dropdown-toggle').html($(this).text());
 	});
 	
+</script>
+<script>
+$(document).on("keyup", ".phoneNumber", function() 
+
+	{ $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})/,"$1-$2-$3").replace("--", "-") ); });
+
+
 </script>
 
 

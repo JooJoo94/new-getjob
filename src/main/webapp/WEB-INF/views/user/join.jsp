@@ -47,7 +47,7 @@
 						</div>
 						<div class="col-sm-12">
 							<div class="form-group">
-								<label for="phone">전화번호</label> <input class="form-control"
+								<label for="phone">전화번호</label> <input class="form-control phoneNumber"
 									id="phone" name="phone" type="text" placeholder="전화번호 입력하세요" />
 							</div>
 						</div>
@@ -95,5 +95,24 @@
 		});
 
 	});
+
+	// 전화번호 하이픈 
+	$(document)
+			.on(
+					"keyup",
+					".phoneNumber",
+					function()
+
+					{
+						$(this)
+								.val(
+										$(this)
+												.val()
+												.replace(/[^0-9]/g, "")
+												.replace(
+														/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})/,
+														"$1-$2-$3").replace(
+														"--", "-"));
+					});
 </script>
 <%@include file="../include/footer.jsp"%>

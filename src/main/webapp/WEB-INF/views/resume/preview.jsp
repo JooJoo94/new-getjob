@@ -12,7 +12,7 @@
 					<div class="container">
 					<br/>
 						<ul class="list-group" style="display: inline-block;">
-							<li style="float: auto; width: 200px; height: 100px;" ><strong>${basic.name}</strong></li>
+							<li style="float: auto; width: 200px; height: 100px; font-size: 25px;" ><strong>${basic.name}</strong></li>					 
 							<li style="float: left; width: 200px; height: 100px;" >
 							<i class="ti-email"></i>
 							${basic.email}  </li>
